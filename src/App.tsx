@@ -7,12 +7,12 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import PrivateRoute from './components/PrivateRoute'
+import { BottomNav } from './components/BottomNav'
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <NavBar />
         <div className="max-w-3xl mx-auto">
           <Routes>
             {/* Rutas privadas */}
@@ -36,6 +36,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <BottomNav />
       </BrowserRouter>
     </AuthProvider>
   )

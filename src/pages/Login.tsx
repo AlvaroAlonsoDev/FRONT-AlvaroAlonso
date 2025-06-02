@@ -1,6 +1,10 @@
 import { useAuth } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
+import { InputField } from '../components/InputField'
+import { Button } from '../components/Button'
+import { FormAlert } from '../components/FormAlert'
+import { PageContainer } from '../components/PageContainer'
 
 export default function Login() {
     const { login } = useAuth()
@@ -24,31 +28,53 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4 max-w-sm mx-auto">
-            <input
-                className="border p-2 rounded"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                autoComplete="username"
-            />
-            <input
-                className="border p-2 rounded"
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                autoComplete="current-password"
-            />
-            <button
-                type="submit"
-                disabled={loading}
-                className="bg-blue-700 text-white rounded px-4 py-2"
+        <PageContainer>
+            <form
+                onSubmit={handleSubmit}
+                className="w-full max-w-md bg-white/70 rounded-3xl shadow-xl p-8 flex flex-col gap-6 border border-gray-100"
+                autoComplete="off"
             >
-                {loading ? "Entrando..." : "Entrar"}
-            </button>
-            {error && <div className="text-red-500">{error}</div>}
-        </form>
+                <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
+                    Inicia sesión
+                </h1>
+                <p className="text-gray-500 text-center mb-4">
+                    Bienvenido a MeetBack
+                </p>
+
+                <InputField
+                    label="Correo electrónico"
+                    name="email"
+                    type="email"
+                    autoComplete="username"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                />
+                <InputField
+                    label="Contraseña"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="Contraseña"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                />
+
+                {error && <FormAlert message={error} />}
+
+                <Button type="submit" disabled={loading || !email || !password}>
+                    {loading ? "Entrando..." : "Entrar"}
+                </Button>
+
+                <div className="text-center text-gray-500 text-sm mt-2">
+                    ¿No tienes cuenta?{" "}
+                    <Link to="/register" className="text-blue-600 hover:underline">
+                        Regístrate
+                    </Link>
+                </div>
+            </form>
+        </PageContainer>
     )
 }
