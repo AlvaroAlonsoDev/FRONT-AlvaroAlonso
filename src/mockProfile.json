@@ -1,0 +1,254 @@
+{
+    "success": true,
+    "message": "Perfil obtenido correctamente",
+    "data": {
+        "user": {
+            "_id": "6840a0a1a2b5e8cbc24001",
+            "handle": "lauragarcia",
+            "displayName": "Laura García",
+            "email": "laura.garcia@gmail.com",
+            "authProvider": "email",
+            "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+            "description": "Apasionada de los viajes, la música y la tecnología. Siempre dispuesta a aprender algo nuevo.",
+            "gender": "F",
+            "birthDate": "1995-11-25T00:00:00.000Z",
+            "location": "Barcelona, España",
+            "isHidden": false,
+            "role": "user",
+            "emailVerified": true,
+            "lastLogin": "2025-06-02T19:11:54.520Z",
+            "referralUserId": null,
+            "createdAt": "2024-12-10T10:02:44.543Z",
+            "updatedAt": "2025-06-02T19:11:54.525Z"
+        },
+        "posts": [
+            {
+                "_id": "6840a12e62b1e3ad8ec1a001",
+                "author": "6840a0a1a2b5e8cbc24001",
+                "content": "¡Increíble concierto anoche! 🎸🎶 ¿Quién más estuvo allí?",
+                "replyTo": null,
+                "threadRoot": null,
+                "media": [
+                    "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+                ],
+                "repliesCount": 3,
+                "likesCount": 18,
+                "repostsCount": 2,
+                "deleted": false,
+                "createdAt": "2025-06-01T22:15:35.192Z",
+                "updatedAt": "2025-06-01T22:15:35.192Z"
+            },
+            {
+                "_id": "6840a13462b1e3ad8ec1a002",
+                "author": "6840a0a1a2b5e8cbc24001",
+                "content": "Hoy tocó ruta de senderismo por Montserrat. ¡Vistas espectaculares! 🌄",
+                "replyTo": null,
+                "threadRoot": null,
+                "media": [],
+                "repliesCount": 2,
+                "likesCount": 12,
+                "repostsCount": 1,
+                "deleted": false,
+                "createdAt": "2025-05-29T14:33:21.192Z",
+                "updatedAt": "2025-05-29T14:33:21.192Z"
+            },
+            {
+                "_id": "6840a13962b1e3ad8ec1a003",
+                "author": "6840a0a1a2b5e8cbc24001",
+                "content": "Preparando un nuevo proyecto de desarrollo web 🚀",
+                "replyTo": null,
+                "threadRoot": null,
+                "media": [],
+                "repliesCount": 1,
+                "likesCount": 6,
+                "repostsCount": 0,
+                "deleted": false,
+                "createdAt": "2025-05-20T09:55:08.192Z",
+                "updatedAt": "2025-05-20T09:55:08.192Z"
+            },
+            {
+                "_id": "6840a14062b1e3ad8ec1a004",
+                "author": "6840a0a1a2b5e8cbc24001",
+                "content": "¡Feliz cumpleaños a mí! 🎉🥳 Celebrando con amigos y familia.",
+                "replyTo": null,
+                "threadRoot": null,
+                "media": [
+                    "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+                ],
+                "repliesCount": 5,
+                "likesCount": 25,
+                "repostsCount": 3,
+                "deleted": false,
+                "createdAt": "2025-05-15T12:00:00.000Z",
+                "updatedAt": "2025-05-15T12:00:00.000Z"
+            }
+        ],
+        "ratingsHistory": [
+            {
+                "_id": "6840a14b62b1e3ad8ec1a010",
+                "from": {
+                    "_id": "6840a0f1a2b5e8cbc24002",
+                    "handle": "carlossanz",
+                    "displayName": "Carlos Sanz",
+                    "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+                    "trustScore": 3
+                },
+                "ratings": {
+                    "sincerity": 5,
+                    "kindness": 2,
+                    "trust": 5,
+                    "vibe": 4,
+                    "responsibility": 5
+                },
+                "comment": "Laura es una persona súper confiable y muy buena compañera.",
+                "createdAt": "2025-06-02T10:13:25.000Z",
+                "weight": 1
+            },
+            {
+                "_id": "6840a14b62b1e3ad8ec1a011",
+                "from": {
+                    "_id": "6840a1f1a2b5e8cbc24003",
+                    "handle": "mariaperez",
+                    "displayName": "María Pérez",
+                    "avatar": "https://randomuser.me/api/portraits/women/68.jpg",
+                    "trustScore": 2
+                },
+                "ratings": {
+                    "sincerity": 4,
+                    "kindness": 5,
+                    "trust": 4,
+                    "vibe": 5,
+                    "responsibility": 4
+                },
+                "comment": "¡Siempre ayuda y anima el grupo! Me encanta su actitud positiva.",
+                "createdAt": "2025-05-30T18:45:11.000Z",
+                "weight": 1
+            },
+            {
+                "_id": "6840a14b62b1e3ad8ec1a012",
+                "from": {
+                    "_id": "6840a2f1a2b5e8cbc24004",
+                    "handle": "alexgomez",
+                    "displayName": "Álex Gómez",
+                    "avatar": "",
+                    "trustScore": 1
+                },
+                "ratings": {
+                    "sincerity": 5,
+                    "kindness": 5,
+                    "trust": 5,
+                    "vibe": 5,
+                    "responsibility": 5
+                },
+                "comment": "¡De las personas más íntegras que conozco!",
+                "createdAt": "2025-05-28T11:20:41.000Z",
+                "weight": 1
+            },
+            {
+                "_id": "6840a14b62b1e3ad8ec1a013",
+                "from": {
+                    "_id": "6840a3f1a2b5e8cbc24005",
+                    "handle": "raulsierra",
+                    "displayName": "Raúl Sierra",
+                    "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+                    "trustScore": 4
+                },
+                "ratings": {
+                    "sincerity": 4,
+                    "kindness": 4,
+                    "trust": 5,
+                    "vibe": 4,
+                    "responsibility": 4
+                },
+                "comment": "Laura es una persona muy responsable y siempre cumple con sus compromisos.",
+                "createdAt": "2025-05-25T09:30:00.000Z",
+                "weight": 1
+            }
+        ],
+        "ratingsStats": {
+            "sincerity": 4,
+            "kindness": 3.6,
+            "trust": 4.7,
+            "vibe": 4,
+            "responsibility": 1.8
+        },
+        "ratingsGiven": [
+            {
+                "_id": "6840a16062b1e3ad8ec1a020",
+                "to": {
+                    "_id": "6840a0f1a2b5e8cbc24002",
+                    "handle": "carlossanz",
+                    "displayName": "Carlos Sanz",
+                    "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+                },
+                "ratings": {
+                    "sincerity": 5,
+                    "kindness": 4,
+                    "trust": 5,
+                    "vibe": 5,
+                    "responsibility": 4
+                },
+                "comment": "¡Siempre está cuando se le necesita!",
+                "createdAt": "2025-05-26T15:31:22.000Z"
+            },
+            {
+                "_id": "6840a16062b1e3ad8ec1a021",
+                "to": {
+                    "_id": "6840a1f1a2b5e8cbc24003",
+                    "handle": "mariaperez",
+                    "displayName": "María Pérez",
+                    "avatar": "https://randomuser.me/api/portraits/women/68.jpg"
+                },
+                "ratings": {
+                    "sincerity": 4,
+                    "kindness": 5,
+                    "trust": 4,
+                    "vibe": 4,
+                    "responsibility": 5
+                },
+                "comment": "Gran amiga y siempre atenta a los detalles.",
+                "createdAt": "2025-05-20T11:19:19.000Z"
+            }
+        ],
+        "followersCount": [
+            {
+                "_id": "6840a0f1a2b5e8cbc24002",
+                "handle": "carlossanz",
+                "displayName": "Carlos Sanz",
+                "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                "_id": "6840a1f1a2b5e8cbc24003",
+                "handle": "mariaperez",
+                "displayName": "María Pérez",
+                "avatar": "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            {
+                "_id": "6840a2f1a2b5e8cbc24004",
+                "handle": "alexgomez",
+                "displayName": "Álex Gómez",
+                "avatar": ""
+            },
+            {
+                "_id": "6840a3f1a2b5e8cbc24005",
+                "handle": "raulsierra",
+                "displayName": "Raúl Sierra",
+                "avatar": "https://randomuser.me/api/portraits/men/65.jpg"
+            }
+        ],
+        "followingCount": [
+            {
+                "_id": "6840a4f1a2b5e8cbc24006",
+                "handle": "patriciacano",
+                "displayName": "Patricia Cano",
+                "avatar": "https://randomuser.me/api/portraits/women/17.jpg"
+            },
+            {
+                "_id": "6840a5f1a2b5e8cbc24007",
+                "handle": "javiermartin",
+                "displayName": "Javier Martín",
+                "avatar": "https://randomuser.me/api/portraits/men/41.jpg"
+            }
+        ]
+    }
+}
