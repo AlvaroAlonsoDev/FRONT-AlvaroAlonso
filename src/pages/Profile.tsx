@@ -44,7 +44,7 @@ export default function Profile() {
 
     return (
         <PageContainer>
-            <div className="w-full max-w-lg bg-white/70 shadow-xl p-6 flex flex-col gap-6 border border-gray-100 mb-16">
+            <div className="w-full max-w-lg shadow-xl p-6 flex flex-col gap-6 border border-gray-100 mb-16">
                 <ProfileHeader
                     avatar={user.avatar}
                     displayName={user.displayName}

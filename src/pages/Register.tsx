@@ -69,7 +69,6 @@ export default function Register() {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    placeholder="Correo electrónico"
                     value={form.email}
                     onChange={handleChange}
                     required
@@ -79,7 +78,6 @@ export default function Register() {
                     name="handle"
                     type="text"
                     autoComplete="username"
-                    placeholder="Usuario (ej: maria98)"
                     value={form.handle}
                     onChange={handleChange}
                     minLength={3}
@@ -89,7 +87,6 @@ export default function Register() {
                     label="Nombre a mostrar"
                     name="displayName"
                     type="text"
-                    placeholder="Nombre a mostrar"
                     value={form.displayName}
                     onChange={handleChange}
                     minLength={2}
@@ -100,7 +97,6 @@ export default function Register() {
                     name="password"
                     type="password"
                     autoComplete="new-password"
-                    placeholder="Contraseña (mínimo 6)"
                     value={form.password}
                     onChange={handleChange}
                     minLength={6}

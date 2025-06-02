@@ -12,7 +12,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto p-1">
           <Routes>
             {/* Rutas privadas */}
             <Route path="/" element={
