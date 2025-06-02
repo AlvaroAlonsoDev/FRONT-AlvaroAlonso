@@ -35,7 +35,10 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-        <BottomNav />
+        {/* Solo mostrar  <BottomNav /> cuando el usuario este logeado */}
+        <PrivateRoute>
+          <BottomNav />
+        </PrivateRoute>
       </BrowserRouter>
     </AuthProvider>
   )
