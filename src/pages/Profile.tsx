@@ -6,7 +6,6 @@ import { RatingsBlock } from "../components/RatingsBlock";
 import { PostsList } from "../components/PostsList";
 import { RatingsHistoryList } from "../components/RatingsHistoryList";
 import { useProfile } from "../contexts/useProfile";
-import mockProfile from "../mockProfile.json";
 import Loading from "../components/Loading";
 
 export default function Profile() {
@@ -37,14 +36,11 @@ export default function Profile() {
         );
     }
 
-    const profileMock = mockProfile.data;
-
-    const { user, followersCount, followingCount, ratingsStats, posts, ratingsHistory } = profileMock;
-    // const { user, followersCount, followingCount, ratingsStats, posts, ratingsHistory } = profile;
+    const { user, followersCount, followingCount, ratingsStats, posts, ratingsHistory } = profile;
 
     return (
         <PageContainer>
-            <div className="w-full max-w-lg bg-white/70 shadow-xl p-6 flex flex-col gap-6 border border-gray-100 mb-16">
+            <div className="w-full max-w-lg shadow-xl p-6 flex flex-col gap-6 border border-gray-100 mb-16">
                 <ProfileHeader
                     avatar={user.avatar}
                     displayName={user.displayName}

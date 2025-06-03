@@ -46,7 +46,6 @@ export default function Login() {
                     name="email"
                     type="email"
                     autoComplete="username"
-                    placeholder="Correo electrónico"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -56,7 +55,6 @@ export default function Login() {
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    placeholder="Contraseña"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     required

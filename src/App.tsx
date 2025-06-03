@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
-import NavBar from './components/NavBar'
 import Profile from './pages/Profile'
 import Feed from './pages/Feed'
 import Login from './pages/Login'
@@ -13,7 +12,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto p-1">
           <Routes>
             {/* Rutas privadas */}
             <Route path="/" element={
@@ -36,7 +35,10 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-        <BottomNav />
+        {/* Solo mostrar  <BottomNav /> cuando el usuario este logeado */}
+        <PrivateRoute>
+          <BottomNav />
+        </PrivateRoute>
       </BrowserRouter>
     </AuthProvider>
   )
