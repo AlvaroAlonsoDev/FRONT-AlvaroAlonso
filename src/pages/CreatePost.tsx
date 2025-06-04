@@ -165,7 +165,7 @@ const CreatePost = () => {
             <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="w-full h-full max-w-md p-2 flex flex-col gap-2"
+                className="w-full max-w-md p-2 flex flex-col gap-2"
             >
                 <form onSubmit={handleSubmit} className="flex flex-col justify-between gap-6">
                     <motion.textarea
@@ -193,8 +193,9 @@ const CreatePost = () => {
                         Publicar
                     </motion.button>
                 </form>
+
                 {/* Sugerencias de ideas */}
-                <div>
+                <div className="mt-4">
                     <p className="mb-2 text-center text-gray-400 text-sm select-none">¿Necesitas ideas?</p>
                     <div className="flex flex-wrap justify-center gap-2">
                         {randomIdeas.map((option) => (

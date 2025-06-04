@@ -10,7 +10,7 @@ import type { Post } from "../store/slices/feedSlice";
 import { useClickOutside } from "../hook/useClickOutside";
 import { usePostActions } from "../hook/usePostActions";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "./Dialog";
-import { BsTrash3 } from "react-icons/bs";
+import DeletePostButton from "./DeletePostButton";
 
 function timeAgo(date: string | Date): string {
     let str = formatDistanceToNow(new Date(date), { addSuffix: true, locale: es });
@@ -21,11 +21,10 @@ function timeAgo(date: string | Date): string {
 export function FeedPost({ post, createPost }: { post: Post, createPost: any }) {
     const navigate = useNavigate();
     const [isOpenReply, setIsOpenReply] = useState(false);
-    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const [isOpenDialogDeletePost, setIsOpenDialogDeletePost] = useState(false);
     const [reply, setReply] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
     const replyRef = useRef<HTMLDivElement>(null);
-    const startPointRef = useRef<{ x: number; y: number } | null>(null);
 
     // @ts-ignore
     useClickOutside(replyRef, () => setIsOpenReply(false), isOpenReply);
@@ -38,89 +37,19 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
     }, [isOpenReply]);
 
     const { deletePost } = usePostActions();
-    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const stopPropagation = (e: React.MouseEvent) => e.stopPropagation();
-    const handleLongPress = async () => {
-        setIsOpenDialog(true);
-    };
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        const tag = (e.target as HTMLElement).tagName.toLowerCase();
-        if (["button", "a", "svg", "img", "span", "path", "input", "textarea"].includes(tag)) return;
-        // Guarda coordenadas iniciales
-        startPointRef.current = { x: e.clientX, y: e.clientY };
-        timerRef.current = setTimeout(handleLongPress, 700);
-
-        // Listener para detectar movimiento
-        const handleMouseMove = (moveEvent: MouseEvent) => {
-            if (!startPointRef.current) return;
-            const dx = Math.abs(moveEvent.clientX - startPointRef.current.x);
-            const dy = Math.abs(moveEvent.clientY - startPointRef.current.y);
-            if (dx > 5 || dy > 5) { // umbral de 5px, ajusta si quieres
-                if (timerRef.current) clearTimeout(timerRef.current);
-                document.removeEventListener("mousemove", handleMouseMove);
-            }
-        };
-        document.addEventListener("mousemove", handleMouseMove);
-
-        // Limpia listener en mouseup
-        const handleMouseUpDoc = () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("mouseup", handleMouseUpDoc);
-        };
-        document.addEventListener("mouseup", handleMouseUpDoc);
-    };
-
-    const handleMouseUp = () => {
-        if (timerRef.current) clearTimeout(timerRef.current);
-        startPointRef.current = null;
-    };
-
-    // Soporte móvil
-    const handleTouchStart = (e: React.TouchEvent) => {
-        const touch = e.touches[0];
-        startPointRef.current = { x: touch.clientX, y: touch.clientY };
-        timerRef.current = setTimeout(handleLongPress, 700);
-
-        // Listener para detectar movimiento
-        const handleTouchMove = (moveEvent: TouchEvent) => {
-            if (!startPointRef.current) return;
-            const touchMove = moveEvent.touches[0];
-            const dx = Math.abs(touchMove.clientX - startPointRef.current.x);
-            const dy = Math.abs(touchMove.clientY - startPointRef.current.y);
-            if (dx > 5 || dy > 5) {
-                if (timerRef.current) clearTimeout(timerRef.current);
-                document.removeEventListener("touchmove", handleTouchMove);
-            }
-        };
-        document.addEventListener("touchmove", handleTouchMove);
-
-        // Limpia listener en touchend
-        const handleTouchEndDoc = () => {
-            document.removeEventListener("touchmove", handleTouchMove);
-            document.removeEventListener("touchend", handleTouchEndDoc);
-        };
-        document.addEventListener("touchend", handleTouchEndDoc);
-    };
-
-    const handleTouchEnd = () => {
-        if (timerRef.current) clearTimeout(timerRef.current);
-        startPointRef.current = null;
-    };
-
-
-    const handleCardClick = (e: React.MouseEvent) => {
-        const tag = (e.target as HTMLElement).tagName.toLowerCase();
-        if (["button", "a", "svg", "img", "span", "path", "input", "textarea"].includes(tag)) return;
-        navigate(`/post/${post._id}`);
-    };
 
     // TODO: Arreglar que al press replyButton si esta abierto que no cierre
     const handleReplyBtn = () => setTimeout(() => {
         if (isOpenReply) return;
         setIsOpenReply((v) => !v);
     }, 0);
+
+    const handleCardClick = (e: React.MouseEvent) => {
+        const tag = (e.target as HTMLElement).tagName.toLowerCase();
+        if (["button", "a", "svg", "img", "span", "path", "input", "textarea"].includes(tag)) return;
+        navigate(`/post/${post._id}`);
+    };
 
     return (
         <div className="bg-white backdrop-blur-md rounded shadow-[0_2px_8px_0_rgba(30,41,59,0.04)] hover:shadow-[0_2px_6px_0_rgba(30,41,59,0.08)]">
@@ -151,11 +80,6 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
 
             <article
                 onClick={handleCardClick}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
                 tabIndex={0}
                 role="button"
                 className="grid grid-cols-[48px_1fr] auto-cols-auto gap-3 py-3 px-4 items-start min-h-0 transition ursor-pointer relative"
@@ -191,6 +115,7 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
                         <div className="flex flex-col justify-between h-full">
                             <LikeButton post={post} />
                             <ReplyButton action={handleReplyBtn} isOpenReply={isOpenReply} />
+                            <DeletePostButton action={() => setIsOpenDialogDeletePost(!isOpenDialogDeletePost)} />
                         </div>
                     </div>
 
@@ -258,47 +183,39 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
                 </AnimatePresence>
 
                 {/* DIALOG */}
-                <Dialog open={isOpenDialog} onClose={() => setIsOpenDialog(false)} className="z-50">
-                    <DialogBackdrop className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onClose={() => setIsOpenDialog(false)} />
-                    <div className="fixed inset-0 z-50 flex items-center justify-center">
-                        <DialogPanel
-                            onClick={stopPropagation}
-                            className="relative mx-4 w-full max-w-sm rounded-2xl bg-white/90 p-8 shadow-2xl ring-1 ring-black/10 backdrop-blur-lg"
-                        >
-                            <div className="flex flex-col items-center gap-3">
-                                <div className="flex items-center justify-center rounded-full bg-red-50 p-4 mb-2">
-                                    <BsTrash3 className="h-7 w-7 text-red-500" />
-                                </div>
-                                <DialogTitle className="text-lg font-bold text-gray-900 text-center">
-                                    ¿Eliminar publicación?
-                                </DialogTitle>
-                                <p className="mt-1 text-center text-gray-500 text-base">
-                                    Esta acción no se puede deshacer.<br />¿Quieres borrar este post?
-                                </p>
-                            </div>
-                            <div className="mt-7 flex flex-col sm:flex-row-reverse gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        deletePost(post._id)
-                                        setIsOpenDialog(false);
-                                    }}
-                                    className="inline-flex justify-center rounded-xl bg-red-600 px-5 py-2 text-base font-semibold text-white shadow hover:bg-red-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
-                                >
-                                    Eliminar
-                                </button>
-                                <button
-                                    type="button"
-                                    autoFocus
-                                    onClick={() => setIsOpenDialog(false)}
-                                    className="inline-flex justify-center rounded-xl bg-white/80 px-5 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100 transition shadow ring-1 ring-inset ring-gray-200"
-                                >
-                                    Cancelar
-                                </button>
-                            </div>
-                        </DialogPanel>
-                    </div>
+                <Dialog open={isOpenDialogDeletePost} onClose={() => setIsOpenDialogDeletePost(false)} className="z-50">
+                    <DialogBackdrop className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onClose={() => setIsOpenDialogDeletePost(false)} />
+                    <DialogPanel className="relative w-full max-w-xs mx-auto rounded-2xl bg-white p-0 shadow-2xl ring-1 ring-black/10">
+                        <div className="px-6 pt-6 pb-3">
+                            <DialogTitle className="text-lg font-semibold text-center text-black">
+                                Eliminar post
+                            </DialogTitle>
+                            <p className="mt-2 text-center text-gray-600 text-base">
+                                ¿Estás seguro de que quieres eliminar este post?
+                            </p>
+                        </div>
+                        <div className="flex border-t border-gray-200">
+                            <button
+                                type="button"
+                                onClick={() => setIsOpenDialogDeletePost(false)}
+                                className="w-1/2 py-3 text-base font-semibold text-blue-600 hover:bg-gray-100 rounded-bl-2xl transition border-r"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    deletePost(post._id);
+                                    setIsOpenDialogDeletePost(false);
+                                }}
+                                className="w-1/2 py-3 text-base font-semibold text-red-600 hover:bg-red-50 rounded-br-2xl transition"
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    </DialogPanel>
                 </Dialog>
+
             </article>
         </div>
     );

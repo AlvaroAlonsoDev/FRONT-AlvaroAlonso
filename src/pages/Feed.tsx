@@ -12,6 +12,17 @@ const TAB_OPTIONS = [
 
 type TabKey = typeof TAB_OPTIONS[number]["key"];
 
+const postVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.97 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: -10, scale: 0.96 },
+};
+
+const transition = {
+    duration: 0.35,
+    ease: [0.42, 0, 0.58, 1],
+};
+
 export default function Feed() {
     const [tab, setTab] = useState<TabKey>("feed");
 
@@ -67,17 +78,17 @@ export default function Feed() {
 
             <motion.section
                 className="mx-auto"
-                layout // <- importante para mantener el layout (altura, etc)
-                transition={{ layout: { duration: 0.35, ease: [0.42, 0, 0.58, 1] } }}
+                layout
+                transition={{ layout: { duration: 0.33, ease: [0.42, 0, 0.58, 1] } }}
             >
                 <AnimatePresence mode="wait" initial={false}>
                     {tab === "feed" && (
                         <motion.div
                             key="feed"
-                            initial={{ opacity: 0, x: -24 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 24 }}
-                            transition={{ duration: 0.36, ease: [0.42, 0, 0.58, 1] }}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={transition}
                             className="w-full"
                         >
                             {error && (
@@ -91,9 +102,22 @@ export default function Feed() {
                                 </div>
                             )}
                             <div className="flex flex-col gap-2 mx-2">
-                                {feed.map((feed) => (
-                                    <FeedPost key={feed._id} post={feed} createPost={createPost} />
-                                ))}
+                                <AnimatePresence initial={false}>
+                                    {feed.map((post) => (
+                                        <motion.div
+                                            key={post._id}
+                                            layout
+                                            initial="hidden"
+                                            animate="visible"
+                                            exit="exit"
+                                            variants={postVariants}
+                                            transition={transition}
+                                            style={{ willChange: "transform, opacity" }}
+                                        >
+                                            <FeedPost post={post} createPost={createPost} />
+                                        </motion.div>
+                                    ))}
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     )}

@@ -5,7 +5,6 @@ import { InputField } from "../components/InputField";
 import { Button } from "../components/Button";
 import { FormAlert } from "../components/FormAlert";
 import { PageContainer } from "../components/PageContainer";
-import TopBarBack from "../components/TopBarBack";
 
 export default function Register() {
     const { register } = useAuth();
@@ -17,7 +16,6 @@ export default function Register() {
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const valid =
@@ -34,12 +32,10 @@ export default function Register() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError(null);
-        setSuccess(null);
         setLoading(true);
         try {
             const res = await register(form);
             if (res.success) {
-                setSuccess("¡Registro exitoso! Redirigiendo…");
                 setTimeout(() => navigate("/login"), 1000);
             } else {
                 setError(res.message || "No se pudo registrar el usuario");
@@ -55,16 +51,34 @@ export default function Register() {
         <>
             <PageContainer>
                 <form
-                    className="w-full max-w-md bg-white/70 rounded-3xl shadow-xl p-8 flex flex-col gap-6 border border-gray-100"
+                    className="
+                    w-full max-w-md
+                    p-10 flex flex-col justify-center gap-4
+                    border border-white/10
+                    transition
+                "
                     onSubmit={handleSubmit}
                     autoComplete="off"
                 >
-                    <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
+                    {/* <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
                         Crea tu cuenta
                     </h1>
                     <p className="text-gray-500 text-center mb-4">
                         Bienvenido a MeetBack
-                    </p>
+                    </p> */}
+                    <div className="flex flex-col items-center gap-2 mb-2">
+                        <span className="flex items-center gap-2 text-blue-600">
+                            <span className="font-bold text-2xl tracking-wide drop-shadow-sm">
+                                Bienvenido a MeetBack
+                            </span>
+                        </span>
+                        <h1 className="text-3xl font-bold tracking-tight">
+                            Crea tu cuenta
+                        </h1>
+                        <p className="text-blue-500 text-base mt-1 mb-0 font-medium">
+                            Conecta. Opina. Mejora.
+                        </p>
+                    </div>
 
                     <InputField
                         label="Correo electrónico"
@@ -105,15 +119,33 @@ export default function Register() {
                         required
                     />
 
-                    {error && <FormAlert message={error} />}
-                    {success && <FormAlert message={success} type="success" />}
-
+                    {error && (
+                        <div className="mt-1 -mb-3">
+                            <FormAlert message={error} />
+                        </div>
+                    )}
                     <Button type="submit" disabled={!valid || loading}>
-                        {loading ? "Registrando…" : "Crear cuenta"}
+                        {loading ? (
+                            <span>Entrando...</span>
+                        ) : (
+                            "Entrar"
+                        )}
                     </Button>
-                    <div className="text-center text-gray-500 text-sm mt-2">
+                    {/* <div className="text-center text-gray-500 text-sm mt-2">
                         ¿Ya tienes cuenta?{" "}
                         <Link to="/login" className="text-blue-500 hover:underline">
+                            Inicia sesión
+                        </Link>
+                    </div> */}
+                    <div className="text-center text-sm">
+                        <span className="text-gray-500">¿Ya tienes cuenta?</span>{" "}
+                        <Link
+                            to="/login"
+                            className="
+                            text-blue-500 font-semibold hover:text-blue-400
+                            transition-colors underline-offset-4 hover:underline
+                        "
+                        >
                             Inicia sesión
                         </Link>
                     </div>

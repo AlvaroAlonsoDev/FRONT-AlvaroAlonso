@@ -16,8 +16,7 @@ const TopBarBack: React.FC<TopBarBackProps> = ({ text, backUrl }) => {
             <span className="text-base font-semibold tracking-tight text-zinc-900">
                 {text}
             </span>
-            <div className='w-[38px] mr-4'>
-            </div>
+            <div className='w-[38px] mr-4'></div>
         </div>
     );
 }

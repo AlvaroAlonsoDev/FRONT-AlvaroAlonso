@@ -64,14 +64,13 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
                             ${isFocused ? "bg-gray-50/90" : ""}
                         pointer-events-none absolute left-4 transition-all duration-200 origin-left 
                         ${showFloating
-                                ? "text-xs font-medium text-blue-600 z-10 scale-90"
+                                ? "text-xs font-medium text-blue-600 z-10 scale-90 backdrop-blur-sm"
                                 : "text-base text-gray-400 top-1/2 -translate-y-1/2"
                             }
                         ${error ? "text-red-500" : ""}
                     `}
                         style={{
                             top: showFloating ? '-8px' : undefined,
-                            padding: 0,
                         }}
                     >
                         {label}
