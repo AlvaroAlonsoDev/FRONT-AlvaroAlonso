@@ -54,30 +54,29 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
     return (
         <div className="bg-white backdrop-blur-md rounded shadow-[0_2px_8px_0_rgba(30,41,59,0.04)] hover:shadow-[0_2px_6px_0_rgba(30,41,59,0.08)]">
             {post.replyTo && (
-                <span className="flex items-center gap-2 mb-1">
+                <Link to={`/post/${post.replyTo._id}`} className="flex items-center gap-2 mb-1">
                     {/* Barra azul sutil, perfectamente alineada */}
                     <div className="h-8 w-1 rounded bg-blue-500 opacity-80 mr-1"></div>
-                    <Link to={`/post/${post.replyTo._id}`}>
+                    <span>
                         <img
                             src={post.replyTo.author.avatar || "/default-avatar.png"}
                             alt={post.replyTo.author.displayName}
                             className="w-5 h-5 rounded-full border border-gray-100 object-cover"
                             loading="lazy"
                         />
-                    </Link>
-                    <Link
-                        to={`/profile/${post.replyTo.author.handle}`}
-                        className="text-xs font-medium text-blue-700 hover:underline truncate"
+                    </span>
+                    <span
+                        className="text-xs font-medium text-blue-700 hover:underline whitespace-nowrap truncate"
                         tabIndex={-1}
                     >
                         {post.replyTo.author.displayName}
-                    </Link>
-                    <span className="text-xs text-gray-400 truncate italic">
+                    </span>
+                    <span className="text-xs text-gray-400 italic line-clamp-2">
                         {post.replyTo.content.length > 60
                             ? post.replyTo.content.slice(0, 60) + "…"
                             : post.replyTo.content}
                     </span>
-                </span>
+                </Link>
             )}
 
             <article
