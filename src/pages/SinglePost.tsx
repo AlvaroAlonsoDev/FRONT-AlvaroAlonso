@@ -1,5 +1,6 @@
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import TopBarBack from "../components/TopBarBack";
 
 // Util para formatear fecha
 const formatDate = (iso: string) =>
@@ -89,16 +90,7 @@ const SinglePost = () => {
             {/* Global styles para ocultar scrollbar horizontal */}
             <style>{globalStyles}</style>
             <div className="min-h-screen bg-white">
-                {/* Top bar */}
-                <div className="sticky top-0 z-10 flex items-center gap-3 bg-white px-4 h-14 border-b border-zinc-100">
-                    <Link to="/" className="p-2 rounded-full hover:bg-zinc-100 transition">
-                        <ArrowLeft size={22} />
-                    </Link>
-                    <span className="text-base font-semibold tracking-tight text-zinc-900">
-                        Post
-                    </span>
-                </div>
-
+                <TopBarBack text="Post" backUrl="/" />
                 {/* Content */}
                 <main className="max-w-xl mx-auto px-4 py-5 w-full">
                     <div className="flex gap-3 items-start">

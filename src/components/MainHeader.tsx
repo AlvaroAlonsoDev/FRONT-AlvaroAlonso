@@ -1,26 +1,26 @@
-import { Plus } from "lucide-react";
+import { Pen, Plus } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
+import { CiChat1 } from "react-icons/ci";
 
 export function MainHeader() {
     const navigate = useNavigate();
     // comprueba si estamos en /post/create
     const isCreatePostPage = window.location.pathname === "/post/create";
-    // const { user } = useAuth();
+    const { user } = useAuth();
 
     return (
-        <header className="sticky top-0 z-20 bg-blue-900 backdrop-blur border-b border-gray-200 shadow-sm">
+        <header className="bg-blue-900 backdrop-blur border-b border-gray-200 shadow-sm">
             <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-14">
                 {/* Avatar/Logo */}
                 <button
                     onClick={() => navigate("/profile")}
-                    className="mr-2"
                     aria-label="Mi perfil"
                 >
                     <img
-                        src="https://cdn-icons-png.freepik.com/256/9347/9347582.png"
+                        src={user?.avatar || "/default-avatar.png"}
                         alt="Tu perfil"
-                        className="w-8 h-8 rounded-full object-cover border border-gray-200"
+                        className="w-8 h-8 rounded-full object-cover border border-blue-300"
                     />
                 </button>
 
@@ -32,17 +32,15 @@ export function MainHeader() {
                 </div> */}
 
                 {/* Acciones derecha */}
-                <div className="flex items-center gap-2">
-                    {!isCreatePostPage && (
-                        <Link
-                            to="/post/create"
-                            className="p-2 bg-blue-800 text-white border border-blue-300 hover:bg-blue-400 rounded-full transition shadow"
-                            aria-label="Nuevo post"
-                        >
-                            <Plus size={16} color="white" />
-                        </Link>
-                    )}
-                </div>
+                {!isCreatePostPage && (
+                    <Link
+                        to="/post/create"
+                        className="p-2 bg-blue-800 text-white border border-blue-300 hover:bg-blue-400 rounded-full transition shadow"
+                        aria-label="Nuevo post"
+                    >
+                        <CiChat1 size={14} className="text-blue-300" />
+                    </Link>
+                )}
             </div>
         </header>
     );

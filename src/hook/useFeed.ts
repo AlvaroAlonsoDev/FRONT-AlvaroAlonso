@@ -21,35 +21,33 @@ export function useFeed() {
             dispatch(setError(null));
             try {
                 const res = await getFeedApi(token, 1, 10);
-                console.log("Fetching feed with token:", res.data);
+                if (res.success && res.data) {
+                    dispatch(setFeed(res.data));
+                } else {
+                    dispatch(setError(res.message || "Error al cargar el feed"));
+                }
 
-                // if (res.success && res.data) {
-                //     dispatch(setFeed(res.data));
-                // } else {
-                //     dispatch(setError(res.message || "Error al cargar el feed"));
-                // }
-                console.log("Mock feed data:", mockFeed.data);
-                const posts: Post[] = mockFeed.data.map(post => ({
-                    _id: post._id,
-                    author: {
-                        _id: post.author._id,
-                        avatar: post.author.avatar,
-                        displayName: post.author.displayName,
-                        handle: post.author.handle,
-                    },
-                    createdAt: post.createdAt,
-                    likesCount: post.likesCount,
-                    likedByMe: false, // inventada si falta
-                    content: post.content,
-                    repliesCount: post.repliesCount,
-                    repostsCount: post.repostsCount,
-                    replyTo: null,
-                    media: Array.isArray(post.media)
-                        ? post.media.map((m: any) => typeof m === 'string' ? m : (m?.url ?? ''))
-                        : [],
-                }));
-
-                dispatch(setFeed(posts));
+                // console.log("Mock feed data:", mockFeed.data);
+                // const posts: Post[] = mockFeed.data.map(post => ({
+                //     _id: post._id,
+                //     author: {
+                //         _id: post.author._id,
+                //         avatar: post.author.avatar,
+                //         displayName: post.author.displayName,
+                //         handle: post.author.handle,
+                //     },
+                //     createdAt: post.createdAt,
+                //     likesCount: post.likesCount,
+                //     likedByMe: false, // inventada si falta
+                //     content: post.content,
+                //     repliesCount: post.repliesCount,
+                //     repostsCount: post.repostsCount,
+                //     replyTo: null,
+                //     media: Array.isArray(post.media)
+                //         ? post.media.map((m: any) => typeof m === 'string' ? m : (m?.url ?? ''))
+                //         : [],
+                // }));
+                // dispatch(setFeed(posts));
             } catch {
                 dispatch(setError("Error de red"));
             } finally {

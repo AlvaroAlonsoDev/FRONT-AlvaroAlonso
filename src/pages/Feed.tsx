@@ -90,7 +90,7 @@ export default function Feed() {
                                     No hay publicaciones aún.
                                 </div>
                             )}
-                            <div className="flex flex-col gap-2 m-1">
+                            <div className="flex flex-col gap-2 mx-2">
                                 {feed.map((feed) => (
                                     <FeedPost key={feed._id} post={feed} createPost={createPost} />
                                 ))}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePostActions } from "../hook/usePostActions";
 import { useNavigate } from "react-router-dom";
+import TopBarBack from "../components/TopBarBack";
 
 const ideaOptions = [
     {
@@ -159,54 +160,57 @@ const CreatePost = () => {
     };
 
     return (
-        <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="w-full h-full max-w-md p-2 flex flex-col gap-2"
-        >
-            <form onSubmit={handleSubmit} className="flex flex-col justify-between gap-6">
-                <motion.textarea
-                    initial={{ scale: 1 }}
-                    whileFocus={{ scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                    rows={10}
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="¿Qué quieres compartir hoy?"
-                    className="w-full resize-none bg-transparent border-none outline-none text-lg font-medium text-[#1a237e] placeholder:text-gray-400 transition-all p-4"
-                    maxLength={280}
-                    autoFocus
-                />
-                <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    disabled={!content.trim()}
-                    type="submit"
-                    className={`w-full py-3 rounded-full text-white text-base font-semibold shadow-md transition-all
-              ${!content.trim()
-                            ? "bg-[#8bbff9] opacity-60 cursor-not-allowed"
-                            : "bg-gradient-to-r from-[#2785fa] to-[#2fbaff] hover:from-[#2674d9] hover:to-[#1ab9eb]"
-                        }`}
-                >
-                    Publicar
-                </motion.button>
-            </form>
-            {/* Sugerencias de ideas */}
-            <div>
-                <p className="mb-2 text-center text-gray-400 text-sm select-none">¿Necesitas ideas?</p>
-                <div className="flex flex-wrap justify-center gap-2">
-                    {randomIdeas.map((option) => (
-                        <button
-                            type="button"
-                            key={option.idea}
-                            onClick={() => handleIdeaClick(option.ejemplos)}
-                            className="px-4 py-1 bg-[#eef6ff] text-[#2574fa] rounded-full text-xs font-medium shadow-sm hover:bg-[#d6ecfd] active:bg-[#b9dafc] transition-all focus:outline-none"
-                        >
-                            {option.idea}
-                        </button>
-                    ))}
+        <>
+            <TopBarBack text="Crear Post" backUrl="/" />
+            <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="w-full h-full max-w-md p-2 flex flex-col gap-2"
+            >
+                <form onSubmit={handleSubmit} className="flex flex-col justify-between gap-6">
+                    <motion.textarea
+                        initial={{ scale: 1 }}
+                        whileFocus={{ scale: 1.01 }}
+                        transition={{ type: "spring", stiffness: 200 }}
+                        rows={10}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="¿Qué quieres compartir hoy?"
+                        className="w-full resize-none bg-transparent border-none outline-none text-lg font-medium text-[#1a237e] placeholder:text-gray-400 transition-all p-4"
+                        maxLength={280}
+                        autoFocus
+                    />
+                    <motion.button
+                        whileTap={{ scale: 0.97 }}
+                        disabled={!content.trim()}
+                        type="submit"
+                        className={`w-full py-3 rounded-full text-white text-base font-semibold shadow-md transition-all
+                        ${!content.trim()
+                                ? "bg-[#8bbff9] opacity-60 cursor-not-allowed"
+                                : "bg-gradient-to-r from-[#2785fa] to-[#2fbaff] hover:from-[#2674d9] hover:to-[#1ab9eb]"
+                            }`}
+                    >
+                        Publicar
+                    </motion.button>
+                </form>
+                {/* Sugerencias de ideas */}
+                <div>
+                    <p className="mb-2 text-center text-gray-400 text-sm select-none">¿Necesitas ideas?</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                        {randomIdeas.map((option) => (
+                            <button
+                                type="button"
+                                key={option.idea}
+                                onClick={() => handleIdeaClick(option.ejemplos)}
+                                className="px-4 py-1 bg-[#eef6ff] text-[#2574fa] rounded-full text-xs font-medium shadow-sm hover:bg-[#d6ecfd] active:bg-[#b9dafc] transition-all focus:outline-none"
+                            >
+                                {option.idea}
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </>
     );
 };
 
