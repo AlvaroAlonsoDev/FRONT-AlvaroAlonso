@@ -25,7 +25,7 @@ export function BottomNav() {
                     <Link
                         to={item.to}
                         key={item.label}
-                        className="flex flex-col items-center relative group mb-[10px]"
+                        className="flex flex-col items-center relative group mb-[15px]"
                         aria-label={item.label}
                         tabIndex={0}
                         style={{ minWidth: 60 }}
