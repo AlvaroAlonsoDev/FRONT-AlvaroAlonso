@@ -8,10 +8,10 @@ type RatingsStats = {
     responsibility: number | null;
 };
 
-export function RatingsBlock({ ratingsStats }: { ratingsStats: RatingsStats }) {
+export function RatingsBlock({ ratingsStats, text }: { ratingsStats: RatingsStats, text: string }) {
     return (
-        <div className="bg-gray-50 rounded-xl p-4 flex flex-col gap-4 mt-1">
-            <div className="font-semibold text-gray-700 mb-1">Valoraciones</div>
+        <div className="bg-gray-50 rounded-xl p-4 flex flex-col gap-4 w-full">
+            <div className="font-semibold text-gray-700 mb-1">{text}</div>
             <RatingItem label="Sinceridad" value={ratingsStats?.sincerity} />
             <RatingItem label="Amabilidad" value={ratingsStats?.kindness} />
             <RatingItem label="Confianza" value={ratingsStats?.trust} />

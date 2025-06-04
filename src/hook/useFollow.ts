@@ -4,7 +4,7 @@ import {
     getFollowStatusApi,
 } from "../helpers/api.follow";
 import { useState, useCallback } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export function useFollow(targetUserId: string) {
     const { token } = useAuth();
