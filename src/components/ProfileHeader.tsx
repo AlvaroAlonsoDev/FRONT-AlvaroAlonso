@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { UserRound, MoreHorizontal, CheckCircle2, LogOut } from "lucide-react";
+import { UserRound, CheckCircle2, LogOut } from "lucide-react";
 import { ProfileExpandable } from "./ProfileExpandable";
-import { BiExit } from "react-icons/bi";
 import { useAuth } from "../contexts/AuthContext";
 
 export function ProfileHeader({

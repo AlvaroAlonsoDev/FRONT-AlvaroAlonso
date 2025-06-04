@@ -1,6 +1,5 @@
 import { Plus } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 // import { useAuth } from "../contexts/AuthContext";
 
 export function MainHeader() {
