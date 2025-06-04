@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { CiChat1 } from "react-icons/ci";
+import { MessageCircle, Text } from "lucide-react";
 
 export function MainHeader() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ export function MainHeader() {
                     <img
                         src={user?.avatar || "/default-avatar.png"}
                         alt="Tu perfil"
-                        className="w-8 h-8 rounded-full object-cover border border-blue-300"
+                        className="w-8 h-8 rounded-full object-cover border-2 border-white"
                     />
                 </button>
 
@@ -34,10 +35,10 @@ export function MainHeader() {
                 {!isCreatePostPage && (
                     <Link
                         to="/post/create"
-                        className="p-2 bg-blue-800 text-white border border-blue-300 hover:bg-blue-400 rounded-full transition shadow"
+                        className="p-2"
                         aria-label="Nuevo post"
                     >
-                        <CiChat1 size={14} className="text-blue-300" />
+                        <MessageCircle size={24} color="white" />
                     </Link>
                 )}
             </div>
