@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { CiChat1 } from "react-icons/ci";
-import { MessageCircle, Text } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 export function MainHeader() {
     const navigate = useNavigate();
