@@ -1,5 +1,4 @@
-import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Heart, MessageCircle } from "lucide-react";
 import TopBarBack from "../components/TopBarBack";
 
 // Util para formatear fecha

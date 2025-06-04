@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { getFeedApi } from "../helpers/api.post";
 import { useAuth } from "../contexts/AuthContext";
 import { useAppSelector } from "../store/useAppSelector";
-import { setError, setFeed, setLoading, type Post, } from "../store/slices/feedSlice";
-import mockFeed from "../mockFeed.json";
+import { setError, setFeed, setLoading } from "../store/slices/feedSlice";
+
 export function useFeed() {
     const dispatch = useDispatch();
     const { token } = useAuth();
