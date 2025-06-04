@@ -13,16 +13,11 @@ const DeletePostButton = ({ post, action }: DeletePostButtonProps) => {
     if (!isMyPost) return null;
     return (
         <span
-            className="
-        flex items-center gap-1 px-2 py-0.5 rounded-full
-        transition group select-none min-w-[38px] min-h-[28px] active:scale-95
-    "
-            tabIndex={-1}
+            className="flex items-center justify-end gap-1 px-2 py-0.5 rounded-full transition group select-none min-w-[38px] min-h-[28px] active:scale-95"
         >
             <button
                 onClick={action}
-                className={`w-full flex items-center justify-end text-gray-500 hover:text-gray-700`}
-                tabIndex={0}
+                className={`flex items-center justify-end text-gray-500 hover:text-gray-700`}
                 aria-label="Me gusta"
                 type="button"
             >

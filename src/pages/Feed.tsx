@@ -101,7 +101,7 @@ export default function Feed() {
                                     No hay publicaciones aún.
                                 </div>
                             )}
-                            <div className="flex flex-col gap-2 mx-2">
+                            <div className="flex flex-col gap-2 mx-2 mt-1">
                                 <AnimatePresence initial={false}>
                                     {feed.map((post) => (
                                         <motion.div

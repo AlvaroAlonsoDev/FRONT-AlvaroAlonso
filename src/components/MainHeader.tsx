@@ -9,7 +9,7 @@ export function MainHeader() {
     const { user } = useAuth();
 
     return (
-        <header className="bg-blue-900 backdrop-blur border-b border-gray-200 shadow-sm">
+        <header className="bg-blue-900 backdrop-blur shadow-sm">
             <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-14">
                 {/* Avatar/Logo */}
                 <button
