@@ -85,13 +85,14 @@ const SinglePost = () => {
     };
 
     return (
+
         <>
             {/* Global styles para ocultar scrollbar horizontal */}
             <style>{globalStyles}</style>
             <div className="min-h-screen bg-white">
                 <TopBarBack text="Post" backUrl="/" />
                 {/* Content */}
-                <main className="max-w-xl mx-auto px-4 py-5 w-full">
+                {/* <main className="max-w-xl mx-auto px-4 py-5 w-full">
                     <div className="flex gap-3 items-start">
                         <img
                             src={post.author.avatar}
@@ -133,7 +134,8 @@ const SinglePost = () => {
                             </div>
                         </div>
                     </div>
-                </main>
+                </main> */}
+                <p className="p-4">Aun esta contruyendose este apartado</p>
             </div>
         </>
     );

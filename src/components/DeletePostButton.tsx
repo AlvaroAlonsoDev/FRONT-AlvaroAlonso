@@ -1,10 +1,16 @@
 import { Trash } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import type { Post } from "../store/slices/feedSlice";
 
 type DeletePostButtonProps = {
+    post: Post;
     action: () => void;
 };
 
-const DeletePostButton = ({ action }: DeletePostButtonProps) => {
+const DeletePostButton = ({ post, action }: DeletePostButtonProps) => {
+    const { user } = useAuth();
+    const isMyPost = user?._id === post.author._id; // Assuming action has userId property
+    if (!isMyPost) return null;
     return (
         <span
             className="

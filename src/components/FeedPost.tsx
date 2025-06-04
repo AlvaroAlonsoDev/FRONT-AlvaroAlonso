@@ -54,15 +54,17 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
     return (
         <div className="bg-white backdrop-blur-md rounded shadow-[0_2px_8px_0_rgba(30,41,59,0.04)] hover:shadow-[0_2px_6px_0_rgba(30,41,59,0.08)]">
             {post.replyTo && (
-                <Link to={`/post/${post.replyTo._id}`} className="flex items-center gap-2 mb-1">
+                <span className="flex items-center gap-2 mb-1">
                     {/* Barra azul sutil, perfectamente alineada */}
                     <div className="h-8 w-1 rounded bg-blue-500 opacity-80 mr-1"></div>
-                    <img
-                        src={post.replyTo.author.avatar || "/default-avatar.png"}
-                        alt={post.replyTo.author.displayName}
-                        className="w-5 h-5 rounded-full border border-gray-100 object-cover"
-                        loading="lazy"
-                    />
+                    <Link to={`/post/${post.replyTo._id}`}>
+                        <img
+                            src={post.replyTo.author.avatar || "/default-avatar.png"}
+                            alt={post.replyTo.author.displayName}
+                            className="w-5 h-5 rounded-full border border-gray-100 object-cover"
+                            loading="lazy"
+                        />
+                    </Link>
                     <Link
                         to={`/profile/${post.replyTo.author.handle}`}
                         className="text-xs font-medium text-blue-700 hover:underline truncate"
@@ -75,7 +77,7 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
                             ? post.replyTo.content.slice(0, 60) + "…"
                             : post.replyTo.content}
                     </span>
-                </Link>
+                </span>
             )}
 
             <article
@@ -115,7 +117,7 @@ export function FeedPost({ post, createPost }: { post: Post, createPost: any }) 
                         <div className="flex flex-col justify-between h-full">
                             <LikeButton post={post} />
                             <ReplyButton action={handleReplyBtn} isOpenReply={isOpenReply} />
-                            <DeletePostButton action={() => setIsOpenDialogDeletePost(!isOpenDialogDeletePost)} />
+                            <DeletePostButton action={() => setIsOpenDialogDeletePost(!isOpenDialogDeletePost)} post={post} />
                         </div>
                     </div>
 
