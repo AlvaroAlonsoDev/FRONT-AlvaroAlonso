@@ -178,7 +178,6 @@ const CreatePost = () => {
                         placeholder="¿Qué quieres compartir hoy?"
                         className="w-full resize-none bg-transparent border-none outline-none text-lg font-medium text-[#1a237e] placeholder:text-gray-400 transition-all p-4"
                         maxLength={280}
-                        autoFocus
                     />
                     <motion.button
                         whileTap={{ scale: 0.97 }}

@@ -7,7 +7,7 @@ type ReplyBoxProps = {
     autoFocus?: boolean;
 };
 
-export function ReplyBox({ onSend, value, setValue, autoFocus = true }: ReplyBoxProps) {
+export function ReplyBox({ onSend, value, setValue, autoFocus = false }: ReplyBoxProps) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     // Autoexpansión básica 
