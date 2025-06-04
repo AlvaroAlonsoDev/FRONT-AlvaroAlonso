@@ -1,57 +1,57 @@
 import TopBarBack from "../components/TopBarBack";
 
 // Util para formatear fecha
-const formatDate = (iso: string) =>
-    new Date(iso).toLocaleString("es-ES", {
-        hour: "2-digit",
-        minute: "2-digit",
-        day: "numeric",
-        month: "short",
-        year: "2-digit",
-    });
+// const formatDate = (iso: string) =>
+//     new Date(iso).toLocaleString("es-ES", {
+//         hour: "2-digit",
+//         minute: "2-digit",
+//         day: "numeric",
+//         month: "short",
+//         year: "2-digit",
+//     });
 
-const MediaGallery = ({ media }: { media: string[] }) => {
-    if (!media?.length) return null;
-    if (media.length === 1)
-        return (
-            <div className="rounded-xl overflow-hidden mt-4 mb-2 w-full">
-                <img
-                    src={media[0]}
-                    alt=""
-                    className="w-full h-60 object-cover"
-                    draggable={false}
-                />
-            </div>
-        );
-    // Carrusel móvil / grid desktop
-    return (
-        <div className="my-2">
-            {/* TODO: Carousel de imagenes */}
-            <div className="grid gap-1 hide-scrollbar md:hidden">
-                {media.map((url, i) => (
-                    <img
-                        key={i}
-                        src={url}
-                        alt=""
-                        className="h-40 w-64 object-cover rounded-lg flex-shrink-0 border border-zinc-100"
-                        draggable={false}
-                    />
-                ))}
-            </div>
-            <div className="hidden md:grid grid-cols-2 gap-2">
-                {media.map((url, i) => (
-                    <img
-                        key={i}
-                        src={url}
-                        alt=""
-                        className="w-full h-48 object-cover rounded-lg border border-zinc-100"
-                        draggable={false}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-};
+// const MediaGallery = ({ media }: { media: string[] }) => {
+//     if (!media?.length) return null;
+//     if (media.length === 1)
+//         return (
+//             <div className="rounded-xl overflow-hidden mt-4 mb-2 w-full">
+//                 <img
+//                     src={media[0]}
+//                     alt=""
+//                     className="w-full h-60 object-cover"
+//                     draggable={false}
+//                 />
+//             </div>
+//         );
+//     // Carrusel móvil / grid desktop
+//     return (
+//         <div className="my-2">
+//             {/* TODO: Carousel de imagenes */}
+//             <div className="grid gap-1 hide-scrollbar md:hidden">
+//                 {media.map((url, i) => (
+//                     <img
+//                         key={i}
+//                         src={url}
+//                         alt=""
+//                         className="h-40 w-64 object-cover rounded-lg flex-shrink-0 border border-zinc-100"
+//                         draggable={false}
+//                     />
+//                 ))}
+//             </div>
+//             <div className="hidden md:grid grid-cols-2 gap-2">
+//                 {media.map((url, i) => (
+//                     <img
+//                         key={i}
+//                         src={url}
+//                         alt=""
+//                         className="w-full h-48 object-cover rounded-lg border border-zinc-100"
+//                         draggable={false}
+//                     />
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
 
 // Oculta la scrollbar horizontal (opcional, para más limpieza visual en móvil)
 const globalStyles = `
@@ -60,28 +60,28 @@ const globalStyles = `
 `;
 
 const SinglePost = () => {
-    const post = {
-        _id: "post2",
-        author: {
-            _id: "user2",
-            username: "lucia_gg",
-            avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-        },
-        content:
-            "Hoy me he animado a salir a correr por primera vez en meses. ¡Feliz martes a todos! 🏃‍♀️✨.",
-        createdAt: "2025-06-03T11:10:00Z",
-        repliesCount: 1,
-        likesCount: 8,
-        likedByMe: false,
-        repostsCount: 0,
-        media: [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
-        ],
-        replyTo: null,
-        threadRoot: null,
-    };
+    // const post = {
+    //     _id: "post2",
+    //     author: {
+    //         _id: "user2",
+    //         username: "lucia_gg",
+    //         avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    //     },
+    //     content:
+    //         "Hoy me he animado a salir a correr por primera vez en meses. ¡Feliz martes a todos! 🏃‍♀️✨.",
+    //     createdAt: "2025-06-03T11:10:00Z",
+    //     repliesCount: 1,
+    //     likesCount: 8,
+    //     likedByMe: false,
+    //     repostsCount: 0,
+    //     media: [
+    //         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
+    //         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
+    //         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
+    //     ],
+    //     replyTo: null,
+    //     threadRoot: null,
+    // };
 
     return (
 
