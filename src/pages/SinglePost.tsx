@@ -1,4 +1,3 @@
-import { Heart, MessageCircle } from "lucide-react";
 import TopBarBack from "../components/TopBarBack";
 
 // Util para formatear fecha

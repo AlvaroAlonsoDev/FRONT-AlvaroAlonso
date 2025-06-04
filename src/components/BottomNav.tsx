@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Home, Star, Bell, User, Trophy } from "lucide-react";
+import { Home, Star, Bell, Trophy, MessageSquare } from "lucide-react";
 import { AnimatedIcon } from "./AnimatedIcon";
 
 const navItems = [
@@ -8,7 +8,7 @@ const navItems = [
     { label: "Ranking", to: "/ranking", icon: Trophy },
     { label: "MeetBack", to: "/meetback", icon: Star },
     { label: "Notificaciones", to: "/notifications", icon: Bell },
-    { label: "Perfil", to: "/profile", icon: User },
+    { label: "Mensajes", to: "/private-msg", icon: MessageSquare },
 ];
 
 export function BottomNav() {
