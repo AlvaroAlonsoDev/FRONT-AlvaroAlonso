@@ -9,7 +9,7 @@ export function MainHeader() {
     // const { user } = useAuth();
 
     return (
-        <header className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-200 shadow-sm">
+        <header className="sticky top-0 z-20 bg-blue-900 backdrop-blur border-b border-gray-200 shadow-sm">
             <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-14">
                 {/* Avatar/Logo */}
                 <button
@@ -36,10 +36,10 @@ export function MainHeader() {
                     {!isCreatePostPage && (
                         <Link
                             to="/post/create"
-                            className="p-2 bg-blue-300 text-white hover:bg-blue-400 rounded-full transition shadow"
+                            className="p-2 bg-blue-800 text-white border border-blue-300 hover:bg-blue-400 rounded-full transition shadow"
                             aria-label="Nuevo post"
                         >
-                            <Plus size={16} color="blue" />
+                            <Plus size={16} color="white" />
                         </Link>
                     )}
                 </div>
