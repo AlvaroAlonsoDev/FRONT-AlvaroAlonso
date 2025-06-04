@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SmoothCollapse } from "./SmoothCollapse";
+import { motion, AnimatePresence } from "framer-motion";
 import { UserRound } from "lucide-react";
 
 type Rating = {
@@ -10,7 +10,7 @@ type Rating = {
     createdAt: string;
 };
 
-export function RatingsHistoryList({ ratingsHistory }: { ratingsHistory: Rating[] }) {
+export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: Rating[], text: string }) {
     const [showAll, setShowAll] = useState(false);
     if (!ratingsHistory?.length) return null;
 
@@ -19,39 +19,57 @@ export function RatingsHistoryList({ ratingsHistory }: { ratingsHistory: Rating[
     const extras = ratingsHistory.slice(3);
 
     return (
-        <div className="mt-3">
-            <div className="font-semibold text-gray-700 mb-2">Valoraciones recibidas</div>
-            <div className="flex flex-col gap-3">
+        <>
+            <div className="font-semibold text-gray-700 mb-2">{text}</div>
+            <div className="flex flex-col gap-2">
                 {/* Siempre visibles */}
                 {firstThree.map((r) => (
                     <RatingCard key={r._id} {...r} />
                 ))}
 
-                {/* Animar solo los extras */}
-                <SmoothCollapse open={showAll}>
-                    <div className="flex flex-col gap-3">
-                        {extras.map((r) => (
-                            <RatingCard key={r._id} {...r} />
-                        ))}
-                    </div>
-                </SmoothCollapse>
+                {/* Animar los extras */}
+                <AnimatePresence initial={false}>
+                    {showAll && extras.map((r) => (
+                        <motion.div
+                            key={r._id}
+                            initial={{ opacity: 0, height: 0, scale: 0.98, y: -8 }}
+                            animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
+                            exit={{ opacity: 0, height: 0, scale: 0.98, y: -8 }}
+                            transition={{ duration: 0.32, ease: [0.42, 0, 0.58, 1] }}
+                            style={{ overflow: "hidden" }}
+                        >
+                            <RatingCard {...r} />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </div>
             {ratingsHistory.length > 3 && (
-                <button
-                    className="mt-2 mx-auto block text-blue-600 font-medium text-sm px-4 py-2 rounded-full bg-blue-50 hover:bg-blue-100 transition shadow"
+                <motion.button
+                    layout
+                    className="mx-auto block text-blue-600 font-medium text-sm px-4 py-2 rounded-full bg-blue-50 hover:bg-blue-100 transition mt-2"
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setShowAll((v) => !v)}
+                    aria-expanded={showAll}
                 >
-                    {showAll ? "Ver menos" : "Ver más"}
-                </button>
+                    <motion.span
+                        key={showAll ? "less" : "more"}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.18 }}
+                    >
+                        {showAll ? "Ver menos" : "Ver más"}
+                    </motion.span>
+                </motion.button>
             )}
-        </div>
+        </>
     );
 }
 
 // Componente para cada valoración
 function RatingCard({ from, ratings, comment, createdAt }: Rating) {
     return (
-        <div className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 transition-shadow hover:shadow-md">
+        <div className="rounded-xl px-4 py-3 border border-gray-100 transition-shadow hover:shadow-md">
             <div className="flex items-center gap-2 mb-1">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                     {from?.avatar ? (

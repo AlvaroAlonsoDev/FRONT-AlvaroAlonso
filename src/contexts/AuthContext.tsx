@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import { loginApi, registerApi } from "../helpers/api.auth";
+import { loginApi, registerApi, verifyTokenApi } from "../helpers/api.auth";
 
 type User = {
     _id: string;
@@ -26,14 +26,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [token, setToken] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const checkAuth = async () => {
         const stored = localStorage.getItem("auth");
         if (stored) {
-            const { user, token } = JSON.parse(stored);
-            setUser(user);
-            setToken(token);
+            const { token } = JSON.parse(stored);
+
+            try {
+                // Llama al endpoint de verify para asegurarte de que el token es válido
+                const res = await verifyTokenApi(token);
+                if (res.success && res.data?.user) {
+                    setUser(res.data.user);
+                    setToken(token);
+                    localStorage.setItem("auth", JSON.stringify({ user: res.data.user, token }));
+                } else {
+                    // Si el token no es válido, limpiamos todo
+                    setUser(null);
+                    setToken(null);
+                    localStorage.removeItem("auth");
+                }
+            } catch (e) {
+                // En caso de error, también limpiamos todo
+                setUser(null);
+                setToken(null);
+                localStorage.removeItem("auth");
+            }
         }
         setLoading(false);
+    };
+
+    useEffect(() => {
+        checkAuth();
     }, []);
 
     const login = async (email: string, password: string) => {

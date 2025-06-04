@@ -1,0 +1,263 @@
+{
+    "data": [
+        {
+            "_id": "post1",
+            "author": {
+                "_id": "user1",
+                "displayName": "martin",
+                "handle": "martin_123",
+                "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            "content": "¡Hola, este es mi primer post en MeetBack! ¿Quién más anda por aquí? 🔥",
+            "createdAt": "2025-06-03T10:30:00Z",
+            "repliesCount": 2,
+            "likesCount": 5,
+            "repostsCount": 1,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post2",
+            "author": {
+                "_id": "user2",
+                "displayName": "lucia_gg",
+                "handle": "lucia_garcia",
+                "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            "content": "Hoy me he animado a salir a correr por primera vez en meses. ¡Feliz martes a todos! 🏃‍♀️✨.",
+            "createdAt": "2025-06-03T11:10:00Z",
+            "repliesCount": 1,
+            "likesCount": 8,
+            "repostsCount": 0,
+            "media": [
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80",
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=70",
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=60"
+            ],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post3",
+            "author": {
+                "_id": "user3",
+                "displayName": "dani_esp",
+                "handle": "dani_esposito",
+                "avatar": "https://randomuser.me/api/portraits/men/54.jpg"
+            },
+            "content": "¿Alguien más está esperando el nuevo álbum de Taylor? 🔥🎶",
+            "createdAt": "2025-06-03T12:01:00Z",
+            "repliesCount": 4,
+            "likesCount": 17,
+            "repostsCount": 3,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post4",
+            "author": {
+                "_id": "user4",
+                "displayName": "anaperez",
+                "handle": "ana_perez",
+                "avatar": "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            "content": "@martin ¡Bienvenido! Aquí la comunidad es genial 😄",
+            "createdAt": "2025-06-03T10:35:00Z",
+            "repliesCount": 0,
+            "likesCount": 2,
+            "repostsCount": 0,
+            "media": [],
+            "replyTo": "post1",
+            "threadRoot": "post1"
+        },
+        {
+            "_id": "post5",
+            "author": {
+                "_id": "user5",
+                "displayName": "samuval",
+                "handle": "samu_valencia",
+                "avatar": "https://randomuser.me/api/portraits/men/77.jpg"
+            },
+            "content": "¡Hola @martin! Si necesitas ayuda para usar MeetBack, aquí estamos 🤙",
+            "createdAt": "2025-06-03T10:40:00Z",
+            "repliesCount": 0,
+            "likesCount": 3,
+            "repostsCount": 0,
+            "media": [],
+            "replyTo": "post1",
+            "threadRoot": "post1"
+        },
+        {
+            "_id": "post6",
+            "author": {
+                "_id": "user6",
+                "displayName": "alejandra",
+                "handle": "alejandra_m",
+                "avatar": "https://randomuser.me/api/portraits/women/25.jpg"
+            },
+            "content": "Hoy me dieron buenas noticias en el trabajo, ¡me siento muy feliz! ✨",
+            "createdAt": "2025-06-03T09:15:00Z",
+            "repliesCount": 3,
+            "likesCount": 12,
+            "repostsCount": 2,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post7",
+            "author": {
+                "_id": "user7",
+                "displayName": "javii",
+                "handle": "javi_82",
+                "avatar": "https://randomuser.me/api/portraits/men/82.jpg"
+            },
+            "content": "¿Alguien tiene recomendaciones de series para ver en Netflix? 🎬",
+            "createdAt": "2025-06-03T12:40:00Z",
+            "repliesCount": 6,
+            "likesCount": 8,
+            "repostsCount": 0,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post8",
+            "author": {
+                "_id": "user8",
+                "displayName": "marina23",
+                "handle": "marina_23",
+                "avatar": "https://randomuser.me/api/portraits/women/41.jpg"
+            },
+            "content": "Qué calor hace hoy, ¿no? ☀️🥵",
+            "createdAt": "2025-06-03T14:05:00Z",
+            "repliesCount": 1,
+            "likesCount": 3,
+            "repostsCount": 0,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post9",
+            "author": {
+                "_id": "user9",
+                "displayName": "pablom",
+                "handle": "pablo_martinez",
+                "avatar": "https://randomuser.me/api/portraits/men/37.jpg"
+            },
+            "content": "¡Por fin terminé mi proyecto! ¿Alguien más en modo celebración? 🎉",
+            "createdAt": "2025-06-03T16:30:00Z",
+            "repliesCount": 2,
+            "likesCount": 14,
+            "repostsCount": 1,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post10",
+            "author": {
+                "_id": "user10",
+                "displayName": "elisa",
+                "handle": "elisa_gomez",
+                "avatar": "https://randomuser.me/api/portraits/women/54.jpg"
+            },
+            "content": "Hoy cociné mi primera lasaña y quedó genial 😋🍝",
+            "createdAt": "2025-06-03T17:45:00Z",
+            "repliesCount": 5,
+            "likesCount": 18,
+            "repostsCount": 2,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post11",
+            "author": {
+                "_id": "user11",
+                "displayName": "carlosro",
+                "handle": "carlos_rodriguez",
+                "avatar": "https://randomuser.me/api/portraits/men/14.jpg"
+            },
+            "content": "Empezando a leer un libro nuevo: ‘El poder del ahora’. ¿Alguien lo leyó? 📚",
+            "createdAt": "2025-06-03T18:20:00Z",
+            "repliesCount": 2,
+            "likesCount": 9,
+            "repostsCount": 1,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post12",
+            "author": {
+                "_id": "user12",
+                "displayName": "noeliaf",
+                "handle": "noelia_flores",
+                "avatar": "https://randomuser.me/api/portraits/women/35.jpg"
+            },
+            "content": "Hoy fue un día de esos en los que todo sale bien. 😌",
+            "createdAt": "2025-06-03T11:10:00Z",
+            "repliesCount": 1,
+            "likesCount": 7,
+            "repostsCount": 0,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post13",
+            "author": {
+                "_id": "user13",
+                "displayName": "ramirox",
+                "handle": "ramiro_xavier",
+                "avatar": "https://randomuser.me/api/portraits/men/29.jpg"
+            },
+            "content": "¿Quién va al concierto este sábado? ¡Nos vemos allí! 🎸",
+            "createdAt": "2025-06-03T19:05:00Z",
+            "repliesCount": 4,
+            "likesCount": 15,
+            "repostsCount": 4,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post14",
+            "author": {
+                "_id": "user14",
+                "displayName": "andrealpz",
+                "handle": "andrea_lopez",
+                "avatar": "https://randomuser.me/api/portraits/women/19.jpg"
+            },
+            "content": "¡Alguien más adicto al café como yo? ☕️😂",
+            "createdAt": "2025-06-03T08:50:00Z",
+            "repliesCount": 2,
+            "likesCount": 10,
+            "repostsCount": 1,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        },
+        {
+            "_id": "post15",
+            "author": {
+                "_id": "user15",
+                "displayName": "fran_ruiz",
+                "handle": "fran_ruiz",
+                "avatar": "https://randomuser.me/api/portraits/men/23.jpg"
+            },
+            "content": "¡Vamos España! Hoy jugamos contra Italia ⚽️🇪🇸",
+            "createdAt": "2025-06-03T21:30:00Z",
+            "repliesCount": 5,
+            "likesCount": 25,
+            "repostsCount": 6,
+            "media": [],
+            "replyTo": null,
+            "threadRoot": null
+        }
+    ]
+}

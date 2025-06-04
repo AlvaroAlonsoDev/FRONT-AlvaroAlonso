@@ -125,26 +125,6 @@
                 "weight": 1
             },
             {
-                "_id": "6840a14b62b1e3ad8ec1a012",
-                "from": {
-                    "_id": "6840a2f1a2b5e8cbc24004",
-                    "handle": "alexgomez",
-                    "displayName": "Álex Gómez",
-                    "avatar": "",
-                    "trustScore": 1
-                },
-                "ratings": {
-                    "sincerity": 5,
-                    "kindness": 5,
-                    "trust": 5,
-                    "vibe": 5,
-                    "responsibility": 5
-                },
-                "comment": "¡De las personas más íntegras que conozco!",
-                "createdAt": "2025-05-28T11:20:41.000Z",
-                "weight": 1
-            },
-            {
                 "_id": "6840a14b62b1e3ad8ec1a013",
                 "from": {
                     "_id": "6840a3f1a2b5e8cbc24005",
@@ -162,6 +142,26 @@
                 },
                 "comment": "Laura es una persona muy responsable y siempre cumple con sus compromisos.",
                 "createdAt": "2025-05-25T09:30:00.000Z",
+                "weight": 1
+            },
+            {
+                "_id": "6840a14b62b1e3ad8ec1a012",
+                "from": {
+                    "_id": "6840a2f1a2b5e8cbc24004",
+                    "handle": "alexgomez",
+                    "displayName": "Álex Gómez",
+                    "avatar": "https://randomuser.me/api/portraits/men/38.jpg",
+                    "trustScore": 1
+                },
+                "ratings": {
+                    "sincerity": 5,
+                    "kindness": 5,
+                    "trust": 5,
+                    "vibe": 5,
+                    "responsibility": 5
+                },
+                "comment": "¡De las personas más íntegras que conozco!",
+                "createdAt": "2025-05-28T11:20:41.000Z",
                 "weight": 1
             }
         ],
