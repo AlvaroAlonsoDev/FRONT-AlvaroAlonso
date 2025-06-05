@@ -4,8 +4,7 @@ type ReplyButtonProps = {
 };
 
 const ReplyButton = ({ action, isOpenReply }: ReplyButtonProps) => {
-    const handleClick = (e: React.MouseEvent) => {
-        console.log("Reply button clicked");
+    const handleClick = () => {
         action(!isOpenReply);
     };
     return (

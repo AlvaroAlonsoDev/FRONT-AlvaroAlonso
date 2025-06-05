@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getFeedApi } from "../helpers/api.post";
 import { useAuth } from "../contexts/AuthContext";
@@ -13,29 +12,6 @@ export function useFeed() {
     const loading = useAppSelector((state) => state.feed.loading);
     const error = useAppSelector((state) => state.feed.error);
 
-    // Solo cargar feed
-    // useEffect(() => {
-    //     const fetchFeed = async () => {
-    //         if (!token) return;
-    //         dispatch(setLoading(true));
-    //         dispatch(setError(null));
-    //         try {
-    //             const res = await getFeedApi(token, 1, 10);
-    //             if (res.success && res.data) {
-    //                 dispatch(setFeed(res.data));
-    //             } else {
-    //                 dispatch(setError(res.message || "Error al cargar el feed"));
-    //             }
-    //         } catch {
-    //             dispatch(setError("Error de red"));
-    //         } finally {
-    //             dispatch(setLoading(false));
-    //         }
-    //     };
-    //     fetchFeed();
-    // }, [token, dispatch]);
-
-    // Puedes devolver función refreshFeed para recargar bajo demanda
     const refreshFeed = async () => {
         if (!token) return;
         dispatch(setLoading(true));
