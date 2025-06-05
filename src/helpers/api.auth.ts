@@ -11,7 +11,7 @@ export async function loginApi({ email, password }: { email: string, password: s
     return res.json();
 }
 
-// TODO: Implementar esta funcion en el AuthContext
+// TODO: Implementar esta funcion cada x tiempo para verificar el token
 export async function verifyTokenApi(token: string | null) {
     console.log("Verificando token API");
     if (!token) throw new Error("Token requerido para verificar");

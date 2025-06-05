@@ -28,7 +28,7 @@ export function ReplyBox({ onSend, value, setValue, autoFocus = false }: ReplyBo
 
     return (
         <div className="w-full">
-            <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 flex flex-col">
+            <div className="rounded-xl  bg-gray-50 px-2 p-1 flex flex-col">
                 <textarea
                     ref={textareaRef}
                     value={value}
@@ -50,11 +50,11 @@ export function ReplyBox({ onSend, value, setValue, autoFocus = false }: ReplyBo
                         disabled={!value.trim()}
                         onClick={onSend}
                         className={`
-              px-4 py-1.5 rounded-full font-semibold text-sm transition shadow-sm
-              ${value.trim()
+                        px-2 py-1 rounded-full font-semibold text-xs transition shadow-sm
+                        ${value.trim()
                                 ? 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800'
                                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'}
-            `}
+                        `}
                     >
                         Responder
                     </button>

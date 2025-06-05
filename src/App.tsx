@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Profile from './pages/Profile'
-import Feed from './pages/Feed'
+import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
@@ -26,15 +26,15 @@ export default function App() {
           {/* Grid principal: 1 fila para el contenido, 1 para el bottom nav */}
           <div className="max-w-md mx-auto min-h-screen grid grid-rows-[1fr_auto]">
             {/* Contenido principal (con padding-bottom para dejar hueco al nav en móviles) */}
-            <div className={`${user && "pb-20 bg-gray-100"}`}>
+            <div className={`${user && "pb-20"}`}>
               {
                 user && <MainHeader />
               }
 
               <Routes>
-                <Route path="/" element={
+                <Route path="/feed" element={
                   <PrivateRoute>
-                    <Feed />
+                    <Home />
                   </PrivateRoute>
                 } />
                 <Route path="/profile" element={
@@ -56,7 +56,7 @@ export default function App() {
                     <Ranking />
                   </PrivateRoute>
                 } />
-                <Route path="/meetback" element={
+                <Route path="/" element={
                   <PrivateRoute>
                     <MeetBack />
                   </PrivateRoute>

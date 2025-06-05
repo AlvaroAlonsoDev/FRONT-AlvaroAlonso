@@ -1,8 +1,11 @@
-import { useState } from "react";
-import { FeedPost } from "../components/FeedPost";
+import { useEffect, useRef, useState } from "react";
+import { CardPost } from "../components/CardPost";
 import { motion, AnimatePresence } from "framer-motion";
 import { useFeed } from "../hook/useFeed";
 import { usePostActions } from "../hook/usePostActions";
+import { useAuth } from "../contexts/AuthContext";
+import { usePopular } from "../hook/usePopular";
+import debounce from "lodash.debounce";
 
 // Tabs
 const TAB_OPTIONS = [
@@ -23,22 +26,48 @@ const transition = {
     ease: [0.42, 0, 0.58, 1],
 };
 
-export default function Feed() {
-    const [tab, setTab] = useState<TabKey>("feed");
-
-    const { feed, loading, error } = useFeed();
+export default function Home() {
+    const { user } = useAuth();
     const { createPost } = usePostActions();
+    const [tab, setTab] = useState<TabKey>("feed");
+    const isFirstLoad = useRef(true);
+    const { feed, loading, error, refreshFeed } = useFeed();
+    const { popularPosts, loading: loadingPopular, error: errorPopular, refreshPopular } = usePopular();
+
+    const debouncedRefresh = useRef(
+        debounce((tab) => {
+            if (tab === "feed") {
+                refreshFeed();
+            } else if (tab === "popular") {
+                refreshPopular();
+            }
+        }, 400)
+    ).current;
+
+    useEffect(() => {
+        if (isFirstLoad.current) {
+            // Primera carga: petición inmediata
+            if (tab === "feed") refreshFeed();
+            else if (tab === "popular") refreshPopular();
+            isFirstLoad.current = false;
+        } else {
+            // Cambios siguientes: debounced
+            debouncedRefresh(tab);
+        }
+        // Cleanup debounce
+        return () => debouncedRefresh.cancel();
+    }, [tab]);
 
     return (
         <>
             {/* Tabs */}
-            <header className="bg-white/90 backdrop-blur sticky top-0 z-10 border-b border-gray-200">
+            <header className="bg-white/90 backdrop-blur border-b border-gray-200">
                 <div className="max-w-2xl mx-auto flex px-4 relative">
                     {TAB_OPTIONS.map((option) => (
                         <button
                             key={option.key}
                             className={`
-                                flex-1 py-4 text-base font-semibold text-center relative outline-none
+                                flex-1 pt-4 text-base font-semibold text-center relative outline-none
                                 ${tab === option.key ? "text-blue-600" : "text-gray-400"}
                                 transition-colors
                                 focus-visible:ring-2 focus-visible:ring-blue-500
@@ -101,7 +130,7 @@ export default function Feed() {
                                     No hay publicaciones aún.
                                 </div>
                             )}
-                            <div className="flex flex-col gap-2 mx-2 mt-1">
+                            <div className="flex flex-col gap-1 mt-1">
                                 <AnimatePresence initial={false}>
                                     {feed.map((post) => (
                                         <motion.div
@@ -114,7 +143,7 @@ export default function Feed() {
                                             transition={transition}
                                             style={{ willChange: "transform, opacity" }}
                                         >
-                                            <FeedPost post={post} createPost={createPost} />
+                                            <CardPost post={post} createPost={createPost} userId={user?._id} />
                                         </motion.div>
                                     ))}
                                 </AnimatePresence>
@@ -122,9 +151,43 @@ export default function Feed() {
                         </motion.div>
                     )}
                     {tab === "popular" && (
-                        <div className="flex flex-col items-center justify-center w-full text-gray-400 font-semibold text-lg">
-                            Próximamente: ¡Aquí verás los posts más populares de la comunidad!
-                        </div>
+                        <motion.div
+                            key="feed"
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={transition}
+                            className="w-full"
+                        >
+                            {errorPopular && (
+                                <div className="bg-red-100 text-red-700 p-3 rounded-xl mb-5 shadow">
+                                    {error}
+                                </div>
+                            )}
+                            {!loadingPopular && popularPosts.length === 0 && (
+                                <div className="text-center text-gray-300 font-medium py-14 select-none">
+                                    No hay publicaciones aún.
+                                </div>
+                            )}
+                            <div className="flex flex-col gap-1 mt-1">
+                                <AnimatePresence initial={false}>
+                                    {popularPosts.map((post) => (
+                                        <motion.div
+                                            key={post._id}
+                                            layout
+                                            initial="hidden"
+                                            animate="visible"
+                                            exit="exit"
+                                            variants={postVariants}
+                                            transition={transition}
+                                            style={{ willChange: "transform, opacity" }}
+                                        >
+                                            <CardPost post={post} createPost={createPost} userId={user?._id} />
+                                        </motion.div>
+                                    ))}
+                                </AnimatePresence>
+                            </div>
+                        </motion.div>
                     )}
                 </AnimatePresence>
             </motion.section>

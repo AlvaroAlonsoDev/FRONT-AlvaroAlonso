@@ -4,9 +4,9 @@ import { Home, Star, Bell, Trophy, MessageSquare } from "lucide-react";
 import { AnimatedIcon } from "./AnimatedIcon";
 
 const navItems = [
-    { label: "Inicio", to: "/", icon: Home },
+    { label: "Feed", to: "/feed", icon: Home },
     { label: "Ranking", to: "/ranking", icon: Trophy },
-    { label: "MeetBack", to: "/meetback", icon: Star },
+    { label: "MeetBack", to: "/", icon: Star },
     { label: "Notificaciones", to: "/notifications", icon: Bell },
     { label: "Mensajes", to: "/private-msg", icon: MessageSquare },
 ];

@@ -67,7 +67,7 @@ const steps = [
         bar: 50
     },
     {
-        title: "Estamos conectando a la comunidad…",
+        title: "Parece que estamos reiniciando el servidor…",
         showMotivation: true,
         bar: 66
     }

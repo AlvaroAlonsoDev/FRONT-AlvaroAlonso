@@ -1,49 +1,21 @@
 // src/slices/feedSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Post } from './feedSlice';
 
-export interface Post {
-    _id: string;
-    author: {
-        _id: string;
-        avatar?: string;
-        displayName: string;
-        handle: string;
-    };
-    createdAt: string | Date;
-    likesCount: number;
-    content: string;
-    repliesCount: number;
-    repostsCount: number;
-    replyTo: {
-        _id: string;
-        author: {
-            _id: string;
-            avatar?: string;
-            displayName: string;
-            handle: string;
-        },
-        content: string;
-        createdAt?: string | Date;
-    };
-    media: string[];
-    likedByMe: boolean;
-    authorFollowedByMe?: boolean;
-}
-
-interface FeedState {
+interface PopularState {
     posts: Post[];
     loading: boolean;
     error: string | null;
 }
 
-const initialState: FeedState = {
+const initialState: PopularState = {
     posts: [],
     loading: false,
     error: null,
 };
 
-const feedSlice = createSlice({
-    name: 'feed',
+const popularSlice = createSlice({
+    name: 'popular',
     initialState,
     reducers: {
         setLoading(state, action: PayloadAction<boolean>) {
@@ -52,7 +24,7 @@ const feedSlice = createSlice({
         setError(state, action: PayloadAction<string | null>) {
             state.error = action.payload;
         },
-        setFeed(state, action: PayloadAction<Post[]>) {
+        setPopular(state, action: PayloadAction<Post[]>) {
             state.posts = action.payload;
         },
         addPost(state, action: PayloadAction<Post>) {
@@ -64,7 +36,7 @@ const feedSlice = createSlice({
         clearFeed(state) {
             state.posts = [];
         },
-        updateFollowingStatusFeed(state, action: PayloadAction<{ targetId: string }>) {
+        updateFollowingStatusPopular(state, action: PayloadAction<{ targetId: string }>) {
             const { targetId } = action.payload;
             state.posts.forEach(post => {
                 if (post.author._id === targetId) {
@@ -75,5 +47,5 @@ const feedSlice = createSlice({
     },
 });
 
-export const { setLoading, setError, setFeed, addPost, removePost, clearFeed, updateFollowingStatusFeed } = feedSlice.actions;
-export default feedSlice.reducer;
+export const { setLoading, setError, setPopular, addPost, removePost, clearFeed, updateFollowingStatusPopular } = popularSlice.actions;
+export default popularSlice.reducer;

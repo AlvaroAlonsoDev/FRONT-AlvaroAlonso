@@ -1,32 +1,25 @@
 import {
     followUserApi,
     unfollowUserApi,
-    getFollowStatusApi,
 } from "../helpers/api.follow";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { updateFollowingStatusPopular } from "../store/slices/popularSlice";
+import { updateFollowingStatusFeed } from "../store/slices/feedSlice";
+import { useDispatch } from "react-redux";
+import { useAnimation } from "../contexts/AnimationContext";
 
-export function useFollow(targetUserId: string) {
+export function useFollow(targetUserId: string, initialFollowing: boolean = false) {
     const { token } = useAuth();
-    const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
+    const [isFollowing, setIsFollowing] = useState<boolean>(initialFollowing);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch();
+    const { triggerAnimation } = useAnimation();
 
-    // Chequeo inicial de estado de follow
-    const checkFollowStatus = useCallback(async () => {
-        if (!token || !targetUserId) return;
-        setLoading(true);
-        setError(null);
-        try {
-            const res = await getFollowStatusApi({ targetUserId, token });
-            if (res.success) setIsFollowing(!!res.data?.isFollowing);
-            else setError(res.message || "Error consultando relación");
-        } catch (e) {
-            setError("Error de red");
-        } finally {
-            setLoading(false);
-        }
-    }, [token, targetUserId]);
+    useEffect(() => {
+        setIsFollowing(initialFollowing);
+    }, [initialFollowing]);
 
     // Follow
     const follow = useCallback(async () => {
@@ -34,9 +27,18 @@ export function useFollow(targetUserId: string) {
         setLoading(true);
         setError(null);
         try {
+            setIsFollowing(true);
             const res = await followUserApi({ targetUserId, token });
-            if (res.success) setIsFollowing(true);
-            else setError(res.message || "No se pudo seguir al usuario");
+            if (res.success) {
+                setIsFollowing(true);
+                dispatch(updateFollowingStatusPopular({ targetId: targetUserId }));
+                dispatch(updateFollowingStatusFeed({ targetId: targetUserId }));
+                triggerAnimation();
+            }
+            else {
+                setIsFollowing(false);
+                setError(res.message || "No se pudo seguir al usuario");
+            }
         } catch (e) {
             setError("Error de red");
         } finally {
@@ -50,9 +52,18 @@ export function useFollow(targetUserId: string) {
         setLoading(true);
         setError(null);
         try {
+            setIsFollowing(false);
             const res = await unfollowUserApi({ targetUserId, token });
-            if (res.success) setIsFollowing(false);
-            else setError(res.message || "No se pudo dejar de seguir");
+            if (res.success) {
+                setIsFollowing(false);
+                dispatch(updateFollowingStatusPopular({ targetId: targetUserId }));
+                dispatch(updateFollowingStatusFeed({ targetId: targetUserId }));
+                triggerAnimation();
+            }
+            else {
+                setIsFollowing(true);
+                setError(res.message || "No se pudo dejar de seguir");
+            }
         } catch (e) {
             setError("Error de red");
         } finally {
@@ -64,7 +75,6 @@ export function useFollow(targetUserId: string) {
         isFollowing,
         loading,
         error,
-        checkFollowStatus,
         follow,
         unfollow,
     };

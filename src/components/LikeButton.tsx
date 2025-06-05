@@ -5,7 +5,7 @@ import { useAnimation } from '../contexts/AnimationContext';
 import type { Post } from '../store/slices/feedSlice';
 
 
-const LikeButton = ({ post }: { post: Post }) => {
+const LikeButton = ({ post, size = 18 }: { post: Post, size?: number }) => {
     const [likedByMe, setLikedByMe] = useState(post.likedByMe ?? false);
     const { triggerAnimation } = useAnimation();
     const { like, unlike } = useLike(post._id);
@@ -45,20 +45,11 @@ const LikeButton = ({ post }: { post: Post }) => {
     return (
         <span
             className="
-        flex items-center gap-1 px-2 py-0.5 rounded-full
-        transition group select-none min-w-[38px] min-h-[28px] active:scale-95
-    "
+                flex items-center gap-1 rounded-full
+                transition group select-none px] active:scale-95
+            "
             tabIndex={-1}
         >
-            <button
-                onClick={handleShowLikes}
-                className="text-xs font-semibold transition text-gray-700"
-                tabIndex={0}
-                aria-label="Ver personas a las que les gusta"
-                type="button"
-            >
-                {initialLikeCount}
-            </button>
             <button
                 onClick={handleLike}
                 className="flex items-center justify-center"
@@ -67,11 +58,20 @@ const LikeButton = ({ post }: { post: Post }) => {
                 type="button"
             >
                 <Heart
-                    size={16}
+                    size={size}
                     className="inline transition"
                     fill={likedByMe ? "#ec4899" : "none"}
                     stroke={likedByMe ? "#ec4899" : "currentColor"}
                 />
+            </button>
+            <button
+                onClick={handleShowLikes}
+                className="text-xs font-semibold transition text-gray-700"
+                tabIndex={0}
+                aria-label="Ver personas a las que les gusta"
+                type="button"
+            >
+                {initialLikeCount}
             </button>
         </span>
     )

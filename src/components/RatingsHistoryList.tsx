@@ -24,7 +24,7 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
             <div className="flex flex-col gap-2">
                 {/* Siempre visibles */}
                 {firstThree.map((r) => (
-                    <RatingCard key={r._id} {...r} />
+                    <RatingCardTest key={r._id} {...r} />
                 ))}
 
                 {/* Animar los extras */}
@@ -38,7 +38,7 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
                             transition={{ duration: 0.32, ease: [0.42, 0, 0.58, 1] }}
                             style={{ overflow: "hidden" }}
                         >
-                            <RatingCard {...r} />
+                            <RatingCardTest {...r} />
                         </motion.div>
                     ))}
                 </AnimatePresence>
@@ -46,7 +46,7 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
             {ratingsHistory.length > 3 && (
                 <motion.button
                     layout
-                    className="mx-auto block text-blue-600 font-medium text-sm px-4 py-2 rounded-full bg-blue-50 hover:bg-blue-100 transition mt-2"
+                    className="mx-auto block text-blue-600 font-medium text-sm px-4 py-1 rounded-full bg-blue-50 hover:bg-blue-100 transition"
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowAll((v) => !v)}
                     aria-expanded={showAll}
@@ -67,9 +67,32 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
 }
 
 // Componente para cada valoración
-function RatingCard({ from, ratings, comment, createdAt }: Rating) {
+function RatingCardTest({ from, ratings, comment, createdAt }: Rating) {
     return (
         <div className="rounded-xl px-4 py-3 border border-gray-100 transition-shadow hover:shadow-md">
+            <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    {from?.avatar ? (
+                        <img src={from.avatar} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                        <UserRound size={20} className="text-gray-300" />
+                    )}
+                </div>
+                <div className="font-medium text-gray-800">{from?.displayName || from?.handle}</div>
+                <span className="text-xs text-gray-400">{new Date(createdAt).toLocaleDateString()}</span>
+            </div>
+            <div className="flex gap-2 text-xs mb-1 flex-wrap">
+                {Object.entries(ratings).map(([k, v]) => (
+                    <span key={k} className="bg-blue-100 text-blue-700 rounded px-2 py-0.5">{k}: {v}</span>
+                ))}
+            </div>
+            {comment && <div className="text-gray-600 text-sm">{comment}</div>}
+        </div>
+    );
+}
+export function RatingCard({ from, ratings, comment, createdAt }: Rating) {
+    return (
+        <div className="hover:shadow-m p-1">
             <div className="flex items-center gap-2 mb-1">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                     {from?.avatar ? (

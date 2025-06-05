@@ -1,30 +1,31 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getFeedApi } from "../helpers/api.post";
+import { getPopularApi } from "../helpers/api.post";
 import { useAuth } from "../contexts/AuthContext";
 import { useAppSelector } from "../store/useAppSelector";
-import { setError, setFeed, setLoading } from "../store/slices/feedSlice";
+import { setError, setPopular, setLoading } from "../store/slices/popularSlice";
 
-export function useFeed() {
+export function usePopular() {
     const dispatch = useDispatch();
     const { token } = useAuth();
 
-    const feed = useAppSelector((state) => state.feed.posts);
-    const loading = useAppSelector((state) => state.feed.loading);
-    const error = useAppSelector((state) => state.feed.error);
+    const popularPosts = useAppSelector((state) => state.popular.posts); // O crea un slice separado si quieres distinguirlo
+    const loading = useAppSelector((state) => state.popular.loading);
+    const error = useAppSelector((state) => state.popular.error);
 
-    // Solo cargar feed
     // useEffect(() => {
-    //     const fetchFeed = async () => {
+    //     const fetchPopular = async () => {
     //         if (!token) return;
     //         dispatch(setLoading(true));
     //         dispatch(setError(null));
     //         try {
-    //             const res = await getFeedApi(token, 1, 10);
+    //             const res = await getPopularApi(token);
+    //             console.log("Popular API response:", res);
+
     //             if (res.success && res.data) {
-    //                 dispatch(setFeed(res.data));
+    //                 dispatch(setPopular(res.data));
     //             } else {
-    //                 dispatch(setError(res.message || "Error al cargar el feed"));
+    //                 dispatch(setError(res.message || "Error al cargar los populares"));
     //             }
     //         } catch {
     //             dispatch(setError("Error de red"));
@@ -32,20 +33,19 @@ export function useFeed() {
     //             dispatch(setLoading(false));
     //         }
     //     };
-    //     fetchFeed();
+    //     fetchPopular();
     // }, [token, dispatch]);
 
-    // Puedes devolver función refreshFeed para recargar bajo demanda
-    const refreshFeed = async () => {
+    const refreshPopular = async () => {
         if (!token) return;
         dispatch(setLoading(true));
         dispatch(setError(null));
         try {
-            const res = await getFeedApi(token, 1, 10);
+            const res = await getPopularApi(token);
             if (res.success && res.data) {
-                dispatch(setFeed(res.data));
+                dispatch(setPopular(res.data));
             } else {
-                dispatch(setError(res.message || "Error al cargar el feed"));
+                dispatch(setError(res.message || "Error al cargar los populares"));
             }
         } catch {
             dispatch(setError("Error de red"));
@@ -54,5 +54,5 @@ export function useFeed() {
         }
     };
 
-    return { feed, loading, error, refreshFeed };
+    return { popularPosts, loading, error, refreshPopular };
 }
