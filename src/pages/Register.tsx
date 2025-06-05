@@ -52,7 +52,7 @@ export default function Register() {
             <PageContainer>
                 <form
                     className="
-                    w-full max-w-md
+                    w-full
                     p-10 flex flex-col justify-center gap-4
                     border border-white/10
                     transition

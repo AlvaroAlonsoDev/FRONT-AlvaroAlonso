@@ -89,9 +89,9 @@ const SinglePost = () => {
             {/* Global styles para ocultar scrollbar horizontal */}
             <style>{globalStyles}</style>
             <div className="min-h-screen bg-white">
-                <TopBarBack text="Post" backUrl="/" />
+                <TopBarBack text="Post" backUrl="/feed" />
                 {/* Content */}
-                {/* <main className="max-w-xl mx-auto px-4 py-5 w-full">
+                {/* <main className="mx-auto px-4 py-5 w-full">
                     <div className="flex gap-3 items-start">
                         <img
                             src={post.author.avatar}

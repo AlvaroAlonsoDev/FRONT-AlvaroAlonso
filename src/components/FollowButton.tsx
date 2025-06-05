@@ -30,7 +30,6 @@ export function FollowButton({ userId, initialFollowing, target }: FollowButtonP
             : "Seguir";
 
     function handleSubmit() {
-        // isFollowing ? unfollow() : follow()
         if (isFollowing) {
             unfollow();
             setShowUnfollow(false);
@@ -45,7 +44,7 @@ export function FollowButton({ userId, initialFollowing, target }: FollowButtonP
             <button
                 type="button"
                 className={[
-                    "flex items-center px-2 rounded-full text-xs font-semibold shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 select-none",
+                    "flex items-center px-2 py-0.5 rounded-full text-xs font-semibold shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 select-none",
                     loading
                         ? "opacity-70 cursor-not-allowed"
                         : isFollowing

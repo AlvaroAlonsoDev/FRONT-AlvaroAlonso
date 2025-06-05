@@ -10,7 +10,6 @@ export function MainHeader() {
 
     return (
         <header className="sticky top-0 z-10 bg-blue-900 backdrop-blur flex items-center justify-between px-4 h-14">
-            {/* <div className="max-w-2xl mx-auto flex items-center justify-between px-4 h-14"> */}
             {/* Avatar/Logo */}
             <button
                 onClick={() => navigate("/profile")}
@@ -23,13 +22,6 @@ export function MainHeader() {
                 />
             </button>
 
-            {/* Nombre de la app centrado o espacio */}
-            {/* <div className="flex-1 flex items-center justify-center">
-                    <span className="font-extrabold text-xl text-blue-700 tracking-tight select-none">
-                        {user?.displayName || "Mi App"}
-                    </span>
-                </div> */}
-
             {/* Acciones derecha */}
             {!isCreatePostPage && (
                 <Link
@@ -40,7 +32,6 @@ export function MainHeader() {
                     <MessageCircle size={24} color="white" />
                 </Link>
             )}
-            {/* </div> */}
         </header>
     );
 }

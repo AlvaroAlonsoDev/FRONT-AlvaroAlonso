@@ -37,7 +37,7 @@ export function ExpandableText({ text, maxLines = 3 }: ExpandableTextProps) {
             </p>
             {showButton && (
                 <button
-                    className="w-full text-xs grid justify-center font-semibold text-blue-600 hover:underline"
+                    className="w-full text-xs grid justify-center font-semibold text-blue-600 hover:underline mt-1"
                     onClick={() => setExpanded((e) => !e)}
                 >
                     {expanded ? "Ver menos" : "Ver más"}

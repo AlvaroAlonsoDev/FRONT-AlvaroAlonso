@@ -87,7 +87,7 @@ export default function Loading() {
     return (
         <div className="flex flex-col items-center justify-center min-h-dvh" aria-busy="true" aria-live="polite">
             <motion.div
-                className="flex flex-col items-center justify-center p-8 w-full max-w-md"
+                className="flex flex-col items-center justify-center p-8 w-full"
                 initial={{ opacity: 0, scale: 0.98, y: 32 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.4, 0.15, 0.3, 1] }}

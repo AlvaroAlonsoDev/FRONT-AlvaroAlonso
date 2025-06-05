@@ -161,11 +161,11 @@ const CreatePost = () => {
 
     return (
         <>
-            <TopBarBack text="Crear Post" backUrl="/" />
+            <TopBarBack text="Crear Post" backUrl="/feed" />
             <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="w-full max-w-md p-2 flex flex-col gap-2"
+                className="w-full p-2 flex flex-col gap-2"
             >
                 <form onSubmit={handleSubmit} className="flex flex-col justify-between gap-6">
                     <motion.textarea

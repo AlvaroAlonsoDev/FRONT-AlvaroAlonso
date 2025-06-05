@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { getProfileApi } from "../helpers/api.user";
 import { useAuth } from "../contexts/AuthContext";
 import mockProfile from "../mockProfile.json";
 

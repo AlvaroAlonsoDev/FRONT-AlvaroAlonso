@@ -39,7 +39,7 @@ export default function Profile() {
 
     return (
         <PageContainer>
-            <div className="w-full max-w-lg px-4 pb-4 flex flex-col gap-2 mt-2">
+            <div className="w-full px-4 pb-4 flex flex-col gap-2 mt-2">
                 <ProfileHeader
                     avatar={user.avatar}
                     displayName={user.displayName}

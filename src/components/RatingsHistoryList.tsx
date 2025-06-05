@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UserRound } from "lucide-react";
-
-type Rating = {
-    _id: string;
-    from: { displayName?: string; handle?: string; avatar?: string };
-    ratings: Record<string, number>;
-    comment?: string;
-    createdAt: string;
-};
+import type { Rating } from "../store/slices/ratingSlice";
+import { timeAgo } from "../utils/functions";
+import { ExpandableText } from "./ExpandableText";
 
 export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: Rating[], text: string }) {
     const [showAll, setShowAll] = useState(false);
@@ -67,18 +62,18 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
 }
 
 // Componente para cada valoración
-function RatingCardTest({ from, ratings, comment, createdAt }: Rating) {
+function RatingCardTest({ toUser, ratings, comment, createdAt }: Rating) {
     return (
         <div className="rounded-xl px-4 py-3 border border-gray-100 transition-shadow hover:shadow-md">
             <div className="flex items-center gap-2 mb-1">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                    {from?.avatar ? (
-                        <img src={from.avatar} alt="" className="w-full h-full object-cover" />
+                    {toUser?.avatar ? (
+                        <img src={toUser.avatar} alt="" className="w-full h-full object-cover" />
                     ) : (
                         <UserRound size={20} className="text-gray-300" />
                     )}
                 </div>
-                <div className="font-medium text-gray-800">{from?.displayName || from?.handle}</div>
+                <div className="font-medium text-gray-800">{toUser?.displayName || toUser?.handle}</div>
                 <span className="text-xs text-gray-400">{new Date(createdAt).toLocaleDateString()}</span>
             </div>
             <div className="flex gap-2 text-xs mb-1 flex-wrap">
@@ -90,26 +85,36 @@ function RatingCardTest({ from, ratings, comment, createdAt }: Rating) {
         </div>
     );
 }
-export function RatingCard({ from, ratings, comment, createdAt }: Rating) {
+export function RatingCard(rating: Rating) {
+    console.log("RatingCard", rating);
+
     return (
         <div className="hover:shadow-m p-1">
             <div className="flex items-center gap-2 mb-1">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                    {from?.avatar ? (
-                        <img src={from.avatar} alt="" className="w-full h-full object-cover" />
+                    {rating.toUser?.avatar || rating.fromUser?.avatar ? (
+                        <img src={rating.toUser?.avatar || rating.fromUser?.avatar} alt="avatar-user" className="w-full h-full object-cover" />
                     ) : (
                         <UserRound size={20} className="text-gray-300" />
                     )}
                 </div>
-                <div className="font-medium text-gray-800">{from?.displayName || from?.handle}</div>
-                <span className="text-xs text-gray-400">{new Date(createdAt).toLocaleDateString()}</span>
+                <div className="font-medium text-gray-800">{rating.toUser?.displayName || rating.toUser?.handle || rating.fromUser?.displayName || rating.fromUser?.handle}</div>
+                <span className="text-xs text-gray-400">
+                    {timeAgo(rating.createdAt)}
+                </span>
             </div>
+
             <div className="flex gap-2 text-xs mb-1 flex-wrap">
-                {Object.entries(ratings).map(([k, v]) => (
+                {Object.entries(rating.ratings).map(([k, v]) => (
                     <span key={k} className="bg-blue-100 text-blue-700 rounded px-2 py-0.5">{k}: {v}</span>
                 ))}
             </div>
-            {comment && <div className="text-gray-600 text-sm">{comment}</div>}
+            {rating.comment && (
+                <div className="text-gray-600 text-sm mt-2">
+                    <ExpandableText text={rating.comment} maxLines={4} />
+                </div>
+            )
+            }
         </div>
     );
 }

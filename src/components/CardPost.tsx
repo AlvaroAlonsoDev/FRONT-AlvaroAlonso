@@ -1,5 +1,3 @@
-import { formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LikeButton from "./LikeButton";
@@ -12,11 +10,7 @@ import { usePostActions } from "../hook/usePostActions";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "./Dialog";
 import DeletePostButton from "./DeletePostButton";
 import { FollowButton } from "./FollowButton";
-
-function timeAgo(date: string | Date): string {
-    let str = formatDistanceToNow(new Date(date), { addSuffix: true, locale: es });
-    return str.replace('alrededor de ', '');
-}
+import { timeAgo } from "../utils/functions";
 
 type FeedPostProps = {
     post: Post;
@@ -116,7 +110,7 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
 
                 {/* Main body: avatar + contenido */}
                 <div
-                    className={`flex items-start gap-4 w-full px-1 pt-1 pb-0 ${isReply ? "" : "pt-0"}`}
+                    className={`flex items-start gap-2 w-full px-1 pt-1 pb-0 ${isReply ? "" : "pt-0"}`}
                 >
                     <div className="flex flex-col items-center justify-start gap-1 shrink-0">
                         <Link to={`/profile/${post.author.handle}`} tabIndex={-1}>
@@ -127,10 +121,14 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
                                 loading="lazy"
                             />
                         </Link>
+                        <DeletePostButton
+                            action={() => setIsOpenDialogDeletePost(!isOpenDialogDeletePost)}
+                            post={post}
+                        />
                     </div>
                     <div className="flex-1 items-start justify-between w-full">
                         <div className="flex items-center justify-between gap-2 min-w-0">
-                            <div className="flex items-center gap-1 flex-1">
+                            <div className="flex items-center gap-2 flex-1">
                                 <Link
                                     to={`/profile/${post.author.handle}`}
                                     className="font-semibold text-base text-gray-900 max-w-36 overflow-hidden truncate hover:underline"
@@ -172,10 +170,6 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
                                     {expanded ? "Ver menos" : "Ver más"}
                                 </button>
                             )}
-                            <DeletePostButton
-                                action={() => setIsOpenDialogDeletePost(!isOpenDialogDeletePost)}
-                                post={post}
-                            />
                             <ReplyButton action={(state: boolean) => setIsOpenReply(state)} isOpenReply={isOpenReply} />
                             {/* TODO: Añadir boton borrar  */}
                         </div>

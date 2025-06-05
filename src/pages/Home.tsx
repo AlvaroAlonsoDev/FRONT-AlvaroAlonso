@@ -171,20 +171,22 @@ export default function Home() {
                             )}
                             <div className="flex flex-col gap-1 mt-1">
                                 <AnimatePresence initial={false}>
-                                    {popularPosts.map((post) => (
-                                        <motion.div
-                                            key={post._id}
-                                            layout
-                                            initial="hidden"
-                                            animate="visible"
-                                            exit="exit"
-                                            variants={postVariants}
-                                            transition={transition}
-                                            style={{ willChange: "transform, opacity" }}
-                                        >
-                                            <CardPost post={post} createPost={createPost} userId={user?._id} />
-                                        </motion.div>
-                                    ))}
+                                    {popularPosts.map((post) =>
+                                        post.author._id === user?._id ? null : (
+                                            <motion.div
+                                                key={post._id}
+                                                layout
+                                                initial="hidden"
+                                                animate="visible"
+                                                exit="exit"
+                                                variants={postVariants}
+                                                transition={transition}
+                                                style={{ willChange: "transform, opacity" }}
+                                            >
+                                                <CardPost post={post} createPost={createPost} userId={user?._id} />
+                                            </motion.div>
+                                        )
+                                    )}
                                 </AnimatePresence>
                             </div>
                         </motion.div>

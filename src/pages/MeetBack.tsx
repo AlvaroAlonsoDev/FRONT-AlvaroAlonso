@@ -1,14 +1,53 @@
-// src/pages/MeetBack.tsx
-
 import { Link } from "react-router-dom";
 import { RatingCard } from "../components/RatingsHistoryList";
 import RatingButton from "../components/RatingButton";
+import { useRating } from "../hook/useRating";
+import { useAuth } from "../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import type { RootState } from "../store/store";
+import { useSelector } from "react-redux";
+import type { Rating } from "../store/slices/ratingSlice";
 
 const MeetBack = () => {
+    const { user } = useAuth();
+    const { getRatingsGiven, getRatingsHistory } = useRating();
+    const [loadingGiven, setLoadingGiven] = useState(false);
+    const [loadingReceived, setLoadingReceived] = useState(false);
+
+    // Valoraciones emitidas y recibidas desde Redux
+    const ratingsGiven = useSelector((state: RootState) => state.rating.ratingsGiven);
+    const ratingsToMe = useSelector((state: RootState) => state.rating.ratingsToMe);
+
+    // Cargar valoraciones dadas
+    useEffect(() => {
+        const fetchRatingsGiven = async () => {
+            if (!user?._id) return;
+            setLoadingGiven(true);
+            try {
+                await getRatingsGiven(user._id);
+            } finally {
+                setLoadingGiven(false);
+            }
+        };
+        fetchRatingsGiven();
+    }, []);
+
+    // Cargar valoraciones recibidas
+    useEffect(() => {
+        const fetchRatingsReceived = async () => {
+            if (!user?._id) return;
+            setLoadingReceived(true);
+            try {
+                await getRatingsHistory(user._id);
+            } finally {
+                setLoadingReceived(false);
+            }
+        };
+        fetchRatingsReceived();
+    }, []);
+
     return (
         <>
-
-            {/* Sección principal */}
             <main className="flex flex-col items-center justify-center flex-1 p-4">
                 {/* Icono estrella */}
                 <div className="mb-4">
@@ -21,7 +60,6 @@ const MeetBack = () => {
                     </svg>
                 </div>
 
-                {/* Mensaje principal */}
                 <h2 className="text-xl font-semibold text-gray-900 mb-2 text-center">
                     Valora a las personas que conoces
                 </h2>
@@ -29,10 +67,8 @@ const MeetBack = () => {
                     Ayuda a construir una comunidad auténtica dando tu opinión real sobre personas con las que has tenido contacto.
                 </p>
 
-                {/* Botón principal */}
                 <RatingButton />
 
-                {/* Accesos rápidos */}
                 <div className="flex gap-4 mt-6">
                     <Link
                         to="/profile"
@@ -48,39 +84,39 @@ const MeetBack = () => {
                     </Link>
                 </div>
 
-                {/* Historial de valoraciones (opcional) */}
-                <div className="mt-8 w-full max-w-md">
+                {/* Valoraciones RECIBIDAS */}
+                <div className="mt-8 w-full">
                     <h3 className="font-semibold text-gray-800 mb-2">
-                        Tus últimas valoraciones
+                        Tus últimas valoraciones recibidas
                     </h3>
+                    {loadingReceived && (
+                        <div className="text-gray-400 py-6 text-center">Cargando valoraciones...</div>
+                    )}
+                    {!loadingReceived && ratingsToMe.length === 0 && (
+                        <div className="text-gray-400 py-6 text-center">Todavía no has recibido valoraciones.</div>
+                    )}
                     <ul className="divide-y divide-gray-100 space-y-2">
-                        {/* Esto lo puedes mapear desde props o state */}
-                        <RatingCard
-                            _id="1"
-                            from={{ displayName: "Juan Pérez", handle: "@juanperez", avatar: "https://cdn-icons-png.freepik.com/256/13979/13979208.png" }}
-                            ratings={{
-                                "sincerity": 4,
-                                "kindness": 4,
-                                "trust": 5,
-                                "vibe": 4,
-                                "responsibility": 4
-                            }}
-                            comment="Excelente persona, muy profesional."
-                            createdAt="2023-10-01"
-                        />
-                        <RatingCard
-                            _id="2"
-                            from={{ displayName: "Ana López", handle: "@analopez", avatar: "https://apex.oracle.com/pls/apex/r/apex_pm/42/files/static/v313/img/persona-female01-apex.png" }}
-                            ratings={{
-                                "sincerity": 5,
-                                "kindness": 5,
-                                "trust": 4,
-                                "vibe": 5,
-                                "responsibility": 5
-                            }}
-                            comment="Muy amable y siempre dispuesta a ayudar."
-                            createdAt="2023-09-28"
-                        />
+                        {ratingsToMe.slice(0, 5).map((rating: Rating) => (
+                            <RatingCard key={rating._id} {...rating} />
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Valoraciones DADAS */}
+                <div className="mt-8 w-full">
+                    <h3 className="font-semibold text-gray-800 mb-2">
+                        Tus últimas valoraciones emitidas
+                    </h3>
+                    {loadingGiven && (
+                        <div className="text-gray-400 py-6 text-center">Cargando valoraciones...</div>
+                    )}
+                    {!loadingGiven && ratingsGiven.length === 0 && (
+                        <div className="text-gray-400 py-6 text-center">Todavía no has valorado a nadie.</div>
+                    )}
+                    <ul className="divide-y divide-gray-100 space-y-2">
+                        {ratingsGiven.slice(0, 5).map((rating: Rating) => (
+                            <RatingCard key={rating._id} {...rating} />
+                        ))}
                     </ul>
                 </div>
             </main>

@@ -2,11 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import feedReducer from './slices/feedSlice';
 import popularReducer from './slices/popularSlice';
+import ratingReducer from './slices/ratingSlice';
 
 export const store = configureStore({
     reducer: {
         feed: feedReducer,
-        popular: popularReducer
+        popular: popularReducer,
+        rating: ratingReducer,
     },
 });
 

@@ -27,7 +27,6 @@ export function useFollow(targetUserId: string, initialFollowing: boolean = fals
         setLoading(true);
         setError(null);
         try {
-            setIsFollowing(true);
             const res = await followUserApi({ targetUserId, token });
             if (res.success) {
                 setIsFollowing(true);
@@ -36,7 +35,6 @@ export function useFollow(targetUserId: string, initialFollowing: boolean = fals
                 triggerAnimation();
             }
             else {
-                setIsFollowing(false);
                 setError(res.message || "No se pudo seguir al usuario");
             }
         } catch (e) {
@@ -52,7 +50,6 @@ export function useFollow(targetUserId: string, initialFollowing: boolean = fals
         setLoading(true);
         setError(null);
         try {
-            setIsFollowing(false);
             const res = await unfollowUserApi({ targetUserId, token });
             if (res.success) {
                 setIsFollowing(false);
@@ -61,7 +58,6 @@ export function useFollow(targetUserId: string, initialFollowing: boolean = fals
                 triggerAnimation();
             }
             else {
-                setIsFollowing(true);
                 setError(res.message || "No se pudo dejar de seguir");
             }
         } catch (e) {

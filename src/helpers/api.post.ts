@@ -13,7 +13,6 @@ export async function getFeedApi(token: string, page = 1, limit = 20) {
     return res.json();
 }
 
-// POPULAR: Todos los posts públicos (requiere token si usas likedByMe, etc)
 export async function getPopularApi(token: string) {
     console.log("Fetching popular API");
     const res = await fetch(`${URL_API}/api/post/admin/all`, {

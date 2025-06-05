@@ -6,3 +6,11 @@ export const ASPECTS = [
     { key: "vibe", label: "Vibe" },
     { key: "responsabilidad", label: "Responsabilidad" },
 ];
+
+export const ASPECTS_EN = {
+    sinceridad: "sincerity",
+    amabilidad: "kindness",
+    confianza: "trust",
+    vibe: "vibe",
+    responsabilidad: "responsibility"
+};

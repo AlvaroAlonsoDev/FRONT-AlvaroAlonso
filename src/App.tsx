@@ -24,7 +24,7 @@ export default function App() {
       <Provider store={store}>
         <AnimationProvider>
           {/* Grid principal: 1 fila para el contenido, 1 para el bottom nav */}
-          <div className="max-w-md mx-auto min-h-screen grid grid-rows-[1fr_auto]">
+          <div className="mx-auto min-h-screen grid grid-rows-[1fr_auto]">
             {/* Contenido principal (con padding-bottom para dejar hueco al nav en móviles) */}
             <div className={`${user && "pb-20"}`}>
               {
