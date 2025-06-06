@@ -1,13 +1,26 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { loginApi, registerApi, verifyTokenApi } from "../helpers/api.auth";
 
-type User = {
+export type User = {
     _id: string;
     handle: string;
     displayName: string;
     email: string;
+    authProvider: "email" | "google" | "apple";
     avatar: string;
-    // ...agrega los campos que necesites
+    description: string;
+    gender: "male" | "female" | "custom" | "N/A";
+    birthDate: Date | null;
+    location: string;
+    isHidden: boolean;
+    trustScore: number;
+    role: "user" | "admin";
+    emailVerificationToken: string;
+    emailVerified: boolean;
+    lastLogin: Date | null;
+    referralUserId: string | null;
+    createdAt: Date;
+    updatedAt: Date;
 };
 
 type AuthContextType = {

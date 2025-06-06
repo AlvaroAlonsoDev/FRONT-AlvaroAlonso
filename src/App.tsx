@@ -16,6 +16,7 @@ import { useAuth } from './contexts/AuthContext'
 import Ranking from './pages/Ranking'
 import MeetBack from './pages/MeetBack'
 import Notifications from './pages/Notifications'
+import { LogsViewer } from './pages/LogsViewer'
 
 export default function App() {
   const { user } = useAuth();
@@ -64,6 +65,11 @@ export default function App() {
                 <Route path="/notifications" element={
                   <PrivateRoute>
                     <Notifications />
+                  </PrivateRoute>
+                } />
+                <Route path="/logs" element={
+                  <PrivateRoute adminOnly>
+                    <LogsViewer />
                   </PrivateRoute>
                 } />
                 <Route path="*" element={<NotFound />} />

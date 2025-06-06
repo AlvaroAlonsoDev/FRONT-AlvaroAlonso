@@ -86,8 +86,6 @@ function RatingCardTest({ toUser, ratings, comment, createdAt }: Rating) {
     );
 }
 export function RatingCard(rating: Rating) {
-    console.log("RatingCard", rating);
-
     return (
         <div className="hover:shadow-m p-1">
             <div className="flex items-center gap-2 mb-1">
