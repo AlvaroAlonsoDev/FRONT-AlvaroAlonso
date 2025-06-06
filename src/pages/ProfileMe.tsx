@@ -40,6 +40,7 @@ export default function ProfileMe() {
         <PageContainer>
             <div className="w-full flex flex-col gap-2">
                 <ProfileHeader
+                    role={user.role}
                     avatar={user.avatar}
                     displayName={user.displayName}
                     handle={user.handle}

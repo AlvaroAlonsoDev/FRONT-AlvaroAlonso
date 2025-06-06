@@ -2,10 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { UserRound, CheckCircle2 } from "lucide-react";
 import { ProfileExpandable } from "./ProfileExpandable";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
 
 export function ProfileHeader({
+    role,
     avatar,
     displayName,
     handle,
@@ -18,6 +19,7 @@ export function ProfileHeader({
     verified = true,
     medal = "🥇",
 }: {
+    role?: "admin" | "user";
     avatar?: string;
     displayName: string;
     handle: string;
@@ -31,6 +33,7 @@ export function ProfileHeader({
     medal?: string;
 }) {
     const [showMore, setShowMore] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <section className="flex flex-col items-center select-none w-full">
@@ -38,6 +41,7 @@ export function ProfileHeader({
             <div className="w-full mx-auto rounded-2xl bg-white/70 px-4 flex flex-col items-stretch py-4 relative">
                 <div className="flex items-center gap-3 w-full mb-1">
                     <motion.div
+                        onClick={() => role === "admin" && navigate("/logs")}
                         className="w-16 h-16 min-w-16 min-h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-300"
                         initial={{ scale: 0.7, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}

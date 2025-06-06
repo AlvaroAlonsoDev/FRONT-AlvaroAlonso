@@ -33,8 +33,8 @@ const loadingMessages = [
 export default function Login() {
     const { login } = useAuth()
     const navigate = useNavigate()
-    const [email, setEmail] = useState('guess@guess.es')
-    const [password, setPassword] = useState('12345')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [loadingMsgIdx, setLoadingMsgIdx] = useState(0);
@@ -163,10 +163,10 @@ export default function Login() {
                         )}
                     </Button>
                     <button
-                        disabled={loading || !email || !password}
+                        type="button"
                         className="w-full py-2 rounded-xl bg-gray-600 hover:bg-gray-700 text-white font-bold text-lg transition active:scale-95 disabled:opacity-60 mt-2"
                         onClick={() => {
-                            setEmail('airuritac@gmail.com')
+                            setEmail('guess@guess.es')
                             setPassword('12345')
                         }}
                     >
