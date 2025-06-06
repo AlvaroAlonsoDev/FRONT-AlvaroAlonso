@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import mockProfile from "../mockProfile.json";
+import { getProfileApi } from "../helpers/api.user";
 
 
 export function useProfile() {
@@ -14,19 +14,16 @@ export function useProfile() {
         setLoading(true);
         setError(null);
 
-        setProfile(mockProfile.data); // Usar mockProfile para pruebas
-        setLoading(false);
-
-        // getProfileApi(token)
-        //     .then((res) => {
-        //         if (res.success && res.data) {
-        //             setProfile(res.data);
-        //         } else {
-        //             setError(res.message || "No se pudo cargar el perfil");
-        //         }
-        //     })
-        //     .catch(() => setError("Error de red"))
-        //     .finally(() => setLoading(false));
+        getProfileApi(token)
+            .then((res) => {
+                if (res.success && res.data) {
+                    setProfile(res.data);
+                } else {
+                    setError(res.message || "No se pudo cargar el perfil");
+                }
+            })
+            .catch(() => setError("Error de red"))
+            .finally(() => setLoading(false));
     }, [token]);
 
     return { profile, loading, error };

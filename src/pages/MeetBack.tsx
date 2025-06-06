@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { RatingCard } from "../components/RatingsHistoryList";
+import { RatingCard } from "../components/RatingsFromMe";
 import RatingButton from "../components/RatingButton";
 import { useRating } from "../hook/useRating";
 import { useAuth } from "../contexts/AuthContext";
@@ -48,7 +48,7 @@ const MeetBack = () => {
 
     return (
         <>
-            <main className="flex flex-col items-center justify-center flex-1 p-4">
+            <main className="flex flex-col items-center justify-center flex-1 p-2">
                 {/* Icono estrella */}
                 <div className="mb-4">
                     <svg

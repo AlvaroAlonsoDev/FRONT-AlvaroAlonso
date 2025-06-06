@@ -16,7 +16,7 @@ export default function PrivateRoute({ children, adminOnly = false }: PrivateRou
 
     if (adminOnly && user.role !== 'admin') {
         // Redirige a otra página si el usuario no es admin
-        return <Navigate to="/unauthorized" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return children;

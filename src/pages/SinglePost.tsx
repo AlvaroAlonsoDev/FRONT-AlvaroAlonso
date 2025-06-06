@@ -1,3 +1,4 @@
+import ComingSoon from "../components/ComingSoon";
 import TopBarBack from "../components/TopBarBack";
 
 // Util para formatear fecha
@@ -89,7 +90,7 @@ const SinglePost = () => {
             {/* Global styles para ocultar scrollbar horizontal */}
             <style>{globalStyles}</style>
             <div className="min-h-screen bg-white">
-                <TopBarBack text="Post" backUrl="/feed" />
+                <TopBarBack text="Post" />
                 {/* Content */}
                 {/* <main className="mx-auto px-4 py-5 w-full">
                     <div className="flex gap-3 items-start">
@@ -134,7 +135,11 @@ const SinglePost = () => {
                         </div>
                     </div>
                 </main> */}
-                <p className="p-4">Aun esta contruyendose este apartado</p>
+
+                <ComingSoon
+                    title="Esta sección está en construcción"
+                    subtitle="Pronto podrás ver los detalles de esta publicación."
+                />
             </div>
         </>
     );

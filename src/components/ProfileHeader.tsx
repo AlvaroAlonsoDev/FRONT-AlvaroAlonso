@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { UserRound, CheckCircle2, LogOut } from "lucide-react";
+import { UserRound, CheckCircle2 } from "lucide-react";
 import { ProfileExpandable } from "./ProfileExpandable";
-import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import ProfileMenu from "./ProfileMenu";
 
 export function ProfileHeader({
     avatar,
@@ -30,12 +31,11 @@ export function ProfileHeader({
     medal?: string;
 }) {
     const [showMore, setShowMore] = useState(false);
-    const { logout } = useAuth();
 
     return (
         <section className="flex flex-col items-center select-none w-full">
             {/* Contenedor principal */}
-            <div className="w-full mx-auto rounded-2xl bg-white/70 px-4 flex flex-col items-stretch py-4 relative z-10">
+            <div className="w-full mx-auto rounded-2xl bg-white/70 px-4 flex flex-col items-stretch py-4 relative">
                 <div className="flex items-center gap-3 w-full mb-1">
                     <motion.div
                         className="w-16 h-16 min-w-16 min-h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-300"
@@ -72,28 +72,29 @@ export function ProfileHeader({
                         </div>
                         <span className="text-blue-500 text-xs truncate">@{handle}</span>
                         <div className="flex items-center gap-5 mt-2">
-                            <button className="flex flex-col items-center focus:outline-none group" tabIndex={0}>
-                                <span className="font-extrabold text-[17px] text-gray-900 group-hover:text-blue-600 transition" style={{ fontVariantNumeric: "tabular-nums" }}>
+                            <Link to={`/follow/followers/me?from=/profile`} className="flex flex-col items-center focus:outline-none group" tabIndex={0}>
+                                <span className="font-extrabold text-xs text-gray-900 group-hover:text-blue-600 transition" style={{ fontVariantNumeric: "tabular-nums" }}>
                                     {followers}
                                 </span>
                                 <span className="text-[11px] text-gray-400 font-medium leading-none">Seguidores</span>
-                            </button>
-                            <button className="flex flex-col items-center focus:outline-none group" tabIndex={0}>
-                                <span className="font-extrabold text-[17px] text-gray-900 group-hover:text-blue-600 transition" style={{ fontVariantNumeric: "tabular-nums" }}>
+                            </Link>
+                            <Link to={`/follow/following/me?from=/profile`} className="flex flex-col items-center focus:outline-none group" tabIndex={0}>
+                                <span className="font-extrabold text-xs text-gray-900 group-hover:text-blue-600 transition" style={{ fontVariantNumeric: "tabular-nums" }}>
                                     {following}
                                 </span>
                                 <span className="text-[11px] text-gray-400 font-medium leading-none">Siguiendo</span>
-                            </button>
+                            </Link>
                         </div>
                     </div>
-                    <motion.button
+                    {/* <motion.button
                         whileTap={{ scale: 0.93 }}
                         className="p-2 rounded-full hover:bg-red-100 active:bg-red-200 transition"
                         aria-label="Más"
                         onClick={logout}
                     >
                         <LogOut size={20} className="text-gray-600" />
-                    </motion.button>
+                    </motion.button> */}
+                    <ProfileMenu />
                 </div>
             </div>
 

@@ -1,17 +1,23 @@
+import { useAnimation } from "../contexts/AnimationContext";
 import { useAuth } from "../contexts/AuthContext";
 import { likePostApi, unlikePostApi, getLikesOfPostApi } from "../helpers/api.like";
 
 export function useLike(postId: string) {
     const { token } = useAuth();
+    const { triggerAnimation } = useAnimation();
 
-    const like = async () => {
+    const like = async (): Promise<boolean> => {
         if (!token) throw new Error("No token");
-        return likePostApi(postId, token);
+        const res = await likePostApi(postId, token);
+        triggerAnimation(!res.success && res.message);
+        return res.success;
     };
 
-    const unlike = async () => {
+    const unlike = async (): Promise<boolean> => {
         if (!token) throw new Error("No token");
-        return unlikePostApi(postId, token);
+        const res = await unlikePostApi(postId, token);
+        triggerAnimation(!res.success && res.message);
+        return res.success;
     };
 
     const getLikes = async () => {

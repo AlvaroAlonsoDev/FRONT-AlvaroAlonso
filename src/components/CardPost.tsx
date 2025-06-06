@@ -53,7 +53,7 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
     const handleCardClick = (e: React.MouseEvent) => {
         const tag = (e.target as HTMLElement).tagName.toLowerCase();
         if (["button", "a", "svg", "img", "span", "path", "input", "textarea"].includes(tag)) return;
-        navigate(`/post/${post._id}`);
+        navigate(`/post/${post._id}?from=/feed`);
     };
 
     return (
@@ -240,12 +240,12 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
 
                 {/* Referencia al post de abajo */}
                 {isReply && (
-                    <Link
-                        to={`/post/${post.replyTo._id}`}
+                    <button
+                        onClick={() => navigate(`/post/${post.replyTo._id}`)}
                         className={`
                             flex items-center gap-2 rounded-t-2xl border-b border-blue-100 bg-blue-50/50
                             px-8 py-0 min-h-[44px] hover:bg-blue-100/50 transition-colors
-                            relative z-20
+                            relative z-20 text-left
                         `}
                         tabIndex={-1}
                     >
@@ -257,12 +257,12 @@ export function CardPost({ post, createPost, userId }: FeedPostProps) {
                         />
 
                         <p className="text-xs text-gray-500 italic flex-1 line-clamp-2">
-                            <span className="text-xs font-semibold text-blue-700 hover:underline whitespace-nowrap mr-1">
+                            <Link to={`/profile/${post.replyTo.author._id}`} onClick={e => e.stopPropagation()} className="text-xs font-semibold text-blue-700 hover:underline whitespace-nowrap mr-1">
                                 {post.replyTo.author.displayName}
-                            </span>
+                            </Link>
                             {post.replyTo.content}
                         </p>
-                    </Link>
+                    </button>
                 )}
 
             </article>

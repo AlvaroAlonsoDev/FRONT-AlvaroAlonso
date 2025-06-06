@@ -4,28 +4,46 @@ import { MessageCircle } from "lucide-react";
 
 export function MainHeader() {
     const navigate = useNavigate();
-    // comprueba si estamos en /post/create
-    const isCreatePostPage = window.location.pathname === "/post/create";
+    const isFeedPage = window.location.pathname === "/feed";
+    const isProfilePage = window.location.pathname === "/profile";
+    const isLogsPage = window.location.pathname === "/logs";
+    if (isLogsPage) return null;
     const { user } = useAuth();
 
     return (
-        <header className="sticky top-0 z-10 bg-blue-900 backdrop-blur flex items-center justify-between px-4 h-14">
+        <header className="
+                sticky top-0 z-10
+                bg-gradient-to-b from-blue-900 to-transparent
+                backdrop-blur
+                flex items-center justify-between
+                px-4 h-14
+            ">
             {/* Avatar/Logo */}
-            <button
-                onClick={() => navigate("/profile")}
-                aria-label="Mi perfil"
-            >
-                <img
-                    src={user?.avatar || "/default-avatar.png"}
-                    alt="Tu perfil"
-                    className="w-8 h-8 rounded-full object-cover border-2 border-white"
-                />
-            </button>
+            {!isProfilePage ? (
+                <button
+                    onClick={() => navigate("/profile")}
+                    aria-label="Mi perfil"
+                >
+                    <img
+                        src={user?.avatar || "/default-avatar.png"}
+                        alt="Tu perfil"
+                        className="w-8 h-8 rounded-full object-cover border-2 border-white"
+                    />
+                </button>
+            ) : (
+                <button
+                    onClick={() => navigate("/")}
+                    aria-label="Home"
+                    className="text-white font-semibold text-lg"
+                >
+                    MeetBack
+                </button>
+            )}
 
             {/* Acciones derecha */}
-            {!isCreatePostPage && (
+            {isFeedPage && (
                 <Link
-                    to="/post/create"
+                    to="/post/create?from=/feed"
                     className="p-2"
                     aria-label="Nuevo post"
                 >

@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { useLike } from '../hook/useLike';
 import { Heart } from 'lucide-react';
-import { useAnimation } from '../contexts/AnimationContext';
 import type { Post } from '../store/slices/feedSlice';
 
 
 const LikeButton = ({ post, size = 18 }: { post: Post, size?: number }) => {
     const [likedByMe, setLikedByMe] = useState(post.likedByMe ?? false);
-    const { triggerAnimation } = useAnimation();
     const { like, unlike } = useLike(post._id);
     const [initialLikeCount, setInitialLikeCount] = useState(post.likesCount);
 
@@ -17,7 +15,7 @@ const LikeButton = ({ post, size = 18 }: { post: Post, size?: number }) => {
             const res = await unlike();
             setLikedByMe(false);
             setInitialLikeCount((prev: number) => Math.max(0, prev - 1));
-            if (!res.success) {
+            if (!res) {
                 console.error("Error al quitar like:", res);
                 setLikedByMe(true);
                 setInitialLikeCount((prev: number) => prev + 1);
@@ -27,13 +25,12 @@ const LikeButton = ({ post, size = 18 }: { post: Post, size?: number }) => {
             const res = await like();
             setLikedByMe(true);
             setInitialLikeCount((prev: number) => prev + 1);
-            if (!res.success) {
+            if (!res) {
                 console.error("Error al dar like:", res);
                 setLikedByMe(false);
                 setInitialLikeCount((prev: number) => Math.max(0, prev - 1));
                 return;
             }
-            triggerAnimation();
         }
     };
 

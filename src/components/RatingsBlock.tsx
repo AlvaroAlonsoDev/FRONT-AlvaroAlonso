@@ -1,4 +1,14 @@
 import { StarRatingDisplay } from "./StarRatingDisplay";
+import { ProfileAvgStar } from "./ProfileAvgStar";
+import { Link } from "react-router-dom";
+
+const ASPECTS = [
+    { key: "sincerity", label: "Sinceridad" },
+    { key: "kindness", label: "Amabilidad" },
+    { key: "trust", label: "Confianza" },
+    { key: "vibe", label: "Vibe" },
+    { key: "responsibility", label: "Responsabilidad" },
+];
 
 type RatingsStats = {
     sincerity: number | null;
@@ -8,25 +18,68 @@ type RatingsStats = {
     responsibility: number | null;
 };
 
-export function RatingsBlock({ ratingsStats, text }: { ratingsStats: RatingsStats, text: string }) {
+export function RatingsBlock({
+    ratingsStats,
+    onShowAllRatings,
+}: {
+    ratingsStats: RatingsStats;
+    onShowAllRatings?: () => void;
+}) {
+    // Calcula la media global (ignora nulls)
+    const values = Object.values(ratingsStats).filter(v => v !== null) as number[];
+    const avg = values.length
+        ? (values.reduce((a, b) => a + b, 0) / values.length).toFixed(1)
+        : "-";
+
     return (
-        <div className="bg-gray-50 rounded-xl p-4 flex flex-col gap-4 w-full">
-            <div className="font-semibold text-gray-700 mb-1">{text}</div>
-            <RatingItem label="Sinceridad" value={ratingsStats?.sincerity} />
-            <RatingItem label="Amabilidad" value={ratingsStats?.kindness} />
-            <RatingItem label="Confianza" value={ratingsStats?.trust} />
-            <RatingItem label="Vibe" value={ratingsStats?.vibe} />
-            <RatingItem label="Responsabilidad" value={ratingsStats?.responsibility} />
+        <div className="w-full flex flex-col gap-4 border-b pb-2">
+            {/* Nota global arriba */}
+            <ProfileAvgStar avg={avg} />
+            {/* Breakdown de aspectos */}
+
+            <div className="flex flex-col mx-2 gap-2">
+                <div className="flex flex-col gap-2">
+                    {ASPECTS.map(({ key, label }) => (
+                        <RatingAspectRow
+                            key={key}
+                            label={label}
+                            value={ratingsStats[key as keyof RatingsStats]}
+                        />
+                    ))}
+                </div>
+                {/* Botón o link */}
+                <div className="flex justify-end">
+                    <Link
+                        to={"/ratings/me?from=/profile"}
+                        onClick={onShowAllRatings}
+                        className="text-[#267cff] hover:underline font-medium text-sm transition"
+                    >
+                        Ver todas las valoraciones
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }
 
-function RatingItem({ label, value }: { label: string; value: number | null }) {
+// Un solo aspecto: barra, emoji, label, valor, estrellas
+function RatingAspectRow({
+    label,
+    value,
+}: {
+    label: string;
+    value: number | null;
+}) {
     return (
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-            <div className="w-32">{label}</div>
-            <StarRatingDisplay value={value} />
-            <span className="ml-2 text-gray-500">{value !== null ? value : "-"}</span>
+        <div className="flex items-center justify-between gap-3">
+            {/* Emoji + label */}
+            <div className="flex items-center gap-1 w-36 min-w-32 font-medium">
+                {label}
+            </div>
+            {/* Valor y estrellas */}
+            <div className="flex items-center gap-2 min-w-[80px] justify-end">
+                <StarRatingDisplay value={value} />
+            </div>
         </div>
     );
 }

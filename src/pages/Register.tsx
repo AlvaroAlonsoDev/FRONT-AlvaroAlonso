@@ -20,7 +20,7 @@ export default function Register() {
 
     const valid =
         form.email.match(/^[^@]+@[^@]+\.[a-z]{2,}$/i) &&
-        form.password.length >= 6 &&
+        form.password.length >= 5 &&
         form.handle.length >= 3 &&
         form.displayName.length >= 2;
 
@@ -126,9 +126,9 @@ export default function Register() {
                     )}
                     <Button type="submit" disabled={!valid || loading}>
                         {loading ? (
-                            <span>Entrando...</span>
+                            <span>Cargando...</span>
                         ) : (
-                            "Entrar"
+                            "Registrarse"
                         )}
                     </Button>
                     {/* <div className="text-center text-gray-500 text-sm mt-2">

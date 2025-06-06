@@ -4,8 +4,9 @@ import { UserRound } from "lucide-react";
 import type { Rating } from "../store/slices/ratingSlice";
 import { timeAgo } from "../utils/functions";
 import { ExpandableText } from "./ExpandableText";
+import { Link } from "react-router-dom";
 
-export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: Rating[], text: string }) {
+export function RatingsFromMe({ ratingsHistory, text }: { ratingsHistory: Rating[], text: string }) {
     const [showAll, setShowAll] = useState(false);
     if (!ratingsHistory?.length) return null;
 
@@ -14,12 +15,15 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
     const extras = ratingsHistory.slice(3);
 
     return (
-        <>
-            <div className="font-semibold text-gray-700 mb-2">{text}</div>
+        <div className="flex flex-col justify-center flex-1 p-2">
+            {/* <div className="font-semibold text-gray-700 mb-2">{text}</div> */}
+            <div className="flex items-center justify-between">
+                <span className="font-semibold text-lg text-gray-800">{text}</span>
+            </div>
             <div className="flex flex-col gap-2">
                 {/* Siempre visibles */}
                 {firstThree.map((r) => (
-                    <RatingCardTest key={r._id} {...r} />
+                    <RatingCard key={r._id} {...r} />
                 ))}
 
                 {/* Animar los extras */}
@@ -33,7 +37,7 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
                             transition={{ duration: 0.32, ease: [0.42, 0, 0.58, 1] }}
                             style={{ overflow: "hidden" }}
                         >
-                            <RatingCardTest {...r} />
+                            <RatingCard {...r} />
                         </motion.div>
                     ))}
                 </AnimatePresence>
@@ -57,38 +61,14 @@ export function RatingsHistoryList({ ratingsHistory, text }: { ratingsHistory: R
                     </motion.span>
                 </motion.button>
             )}
-        </>
-    );
-}
-
-// Componente para cada valoración
-function RatingCardTest({ toUser, ratings, comment, createdAt }: Rating) {
-    return (
-        <div className="rounded-xl px-4 py-3 border border-gray-100 transition-shadow hover:shadow-md">
-            <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                    {toUser?.avatar ? (
-                        <img src={toUser.avatar} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                        <UserRound size={20} className="text-gray-300" />
-                    )}
-                </div>
-                <div className="font-medium text-gray-800">{toUser?.displayName || toUser?.handle}</div>
-                <span className="text-xs text-gray-400">{new Date(createdAt).toLocaleDateString()}</span>
-            </div>
-            <div className="flex gap-2 text-xs mb-1 flex-wrap">
-                {Object.entries(ratings).map(([k, v]) => (
-                    <span key={k} className="bg-blue-100 text-blue-700 rounded px-2 py-0.5">{k}: {v}</span>
-                ))}
-            </div>
-            {comment && <div className="text-gray-600 text-sm">{comment}</div>}
         </div>
     );
 }
+
 export function RatingCard(rating: Rating) {
     return (
-        <div className="hover:shadow-m p-1">
-            <div className="flex items-center gap-2 mb-1">
+        <div>
+            <Link to={`/profile/${rating.fromUser?.handle || rating.toUser?.handle}?from=/`} className="flex items-center gap-2 mb-1">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                     {rating.toUser?.avatar || rating.fromUser?.avatar ? (
                         <img src={rating.toUser?.avatar || rating.fromUser?.avatar} alt="avatar-user" className="w-full h-full object-cover" />
@@ -100,7 +80,7 @@ export function RatingCard(rating: Rating) {
                 <span className="text-xs text-gray-400">
                     {timeAgo(rating.createdAt)}
                 </span>
-            </div>
+            </Link>
 
             <div className="flex gap-2 text-xs mb-1 flex-wrap">
                 {Object.entries(rating.ratings).map(([k, v]) => (
