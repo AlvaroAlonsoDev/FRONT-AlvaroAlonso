@@ -151,7 +151,7 @@ const CreatePost = () => {
         if (!content.trim()) return;
         await createPost({ content: content.trim() } as CreatePostData);
         setContent("");
-        navigate("/");
+        navigate("/feed");
     };
 
     const handleIdeaClick = (ejemplos: string[]) => {
